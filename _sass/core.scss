@@ -31,7 +31,8 @@ $break_l: 1400px; /*min-width: 1400px*/
 /*** IDs  *****************************************/
 
 #why {
-  margin-top: 200px;
+  margin-top: 150px;
+  margin-left: -5em;
 }
 
 @media screen and (min-width: $break_s) {
@@ -48,7 +49,12 @@ $break_l: 1400px; /*min-width: 1400px*/
 
 #how {
   background-color: #F6F6F6;
+  /*background-color: transparent;*/
   padding-top: 60px;
+}
+
+#what {
+  margin-top: 0px;
 }
 
 /**************************************************/
@@ -185,12 +191,14 @@ h5 {
 
 
 h6 {
-  font-size: 28px;
-  font-weight: 500;
   font-style: italic;
   margin-top: 0px;
   margin-right: 0px;
   margin-bottom: 50px;
+  border-left: 5px solid #000;
+  padding-left: 20px;
+  font-size: 28px;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 760px) {
@@ -251,12 +259,6 @@ li a:hover {
   transition-duration: .5s;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #000;
-}
-
 /**************************************************/
 
 .grid {
@@ -300,21 +302,6 @@ img {
   transition-duration: 0.5s;
 }
 
-.circled {
-  position: absolute;
-  z-index: -1;
-  max-height: 2em;
-  max-width: 100%;
-}
-
-.underlined {
-  position: absolute;
-  z-index: -1;
-  max-height: 1em;
-  max-width: 100%;
-  transform: translateY(1em);
-}
-
 .cursor {
   position:absolute;
   margin-top: 0.2em;
@@ -327,50 +314,6 @@ img {
   height: 8em;
   margin: 0px;
   margin-right: 1em;
-}
-
-.dot {
-  position: absolute;
-  color: #E72175;
-  font-size: 2em;
-  margin-left: 0px;
-}
-
-.indent {
-  margin-left: 2.3em;
-  margin-top: 0.2em;
-}
-
-.cursor-block {
-  position: absolute;
-  margin-left: -1.7em;
-  height: 2.2em;
-}
-
-.iconblock img {
-  position: absolute;
-  max-height: 3em;
-}
-
-@media screen and (max-width: 760px) {
-  .cursor-logo {
-    height: 5rem;
-    margin-left: 0px;
-    vertical-align: text-bottom;
-  }
-}
-
-@media screen and (max-width: 760px) {
-  .w-auto {
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-}
-
-@media screen and (max-width: 760px) {
-  #why {
-    margin-top: 0px;
-  }
 }
 
 /**************************************************/
@@ -447,3 +390,36 @@ img {
   height: 20px;
   height: 1vmax;
 }
+
+/*** Scribbles  *****************************/
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #000;
+}
+
+.space {
+  margin: 30px;
+}
+
+.circled {
+  position: absolute;
+  z-index: -1;
+  max-height: 3em;
+  max-width: 130%;
+  transform: translate(-0.3em, -0.5em);
+}
+
+.underlined {
+  position: absolute;
+  z-index: -1;
+  max-height: 1em;
+  max-width: 100%;
+  transform: translateY(1em);
+}
+
+/*** Scribbles  *****************************/
+
+
+

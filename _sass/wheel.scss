@@ -1,0 +1,171 @@
+
+
+/*********************************************/
+/****  Wheel                              ****/
+/*********************************************/
+
+/* Hues
+    code  : 200
+    c-p   : 65
+    people: 2
+*/
+/* Saturations
+    light: 67%
+    dark : 59%
+*/
+/* Value
+    light: 59%
+    dark : 36%
+*/
+
+#wheel {
+  text-align: center;
+  letter-spacing: 0;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Arial, Helvetica;
+}
+
+#wheel .node circle {
+  fill: #d0d0d0;
+}
+
+#wheel .peopleLink {
+  stroke: rgb(132, 132, 132);
+  fill: rgb(132, 132, 132); 
+}
+
+#wheel .peopleLink:hover {
+  cursor: pointer;
+}
+
+#wheel .ppLink {
+  stroke: hsl(65, 67%, 59%);
+  fill: hsl(65, 59%, 36%);
+  fill-opacity: 0.8;
+  stroke-opacity: 0.2;
+}
+
+#wheel .ppLink:hover {
+  cursor: pointer;
+}
+
+#wheel .cpLink {
+  stroke: hsl(2, 67%, 59%);
+  fill: hsl(2, 59%, 36%);
+  fill-opacity: 0.8;
+  stroke-opacity: 0.2;
+}
+
+#wheel .cpLink:hover {
+  cursor: pointer;
+}
+
+#wheel .link {
+  stroke: hsl(200, 67%, 59%);
+  fill: hsl(200, 59%, 36%);
+  fill-opacity: 0.8;
+  stroke-opacity: 0.3;
+  stroke-width: 1px;
+}
+
+#wheel .ccLink:hover {
+  cursor: pointer;
+}
+
+#wheel .nodeGroup {
+  fill: black; //#d0d0d0;
+}
+
+#wheel .child-node {
+  font-size: 7px;
+}
+
+#wheel .child-node:hover {
+  cursor: pointer;
+}
+
+#wheel .node--selected { 
+  fill: #403f3f; //white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#wheel .node--source { 
+  fill: #403f3f; //white;
+  font-size: 10px;
+  font-weight: bold;
+  fill: #dbf433;
+}
+
+#wheel .node--target { 
+  font-weight: bold;
+  fill: #dbf433;
+}
+
+
+#wheel .link--selected { 
+  stroke-opacity: 1;
+  fill-opacity: 1;
+  //stroke-width: 1px;
+  //stroke: #b3c72c;
+  //fill: #b3c72c;
+}
+
+#wheel .link--faded { 
+  stroke-opacity: 0.01;
+  stroke-width: 1px;
+  stroke: hsl(0, 0%, 36%) !important;
+	fill-opacity: 0.01 !important;
+  fill: hsl(0, 0%, 36%) !important;
+}
+
+#wheel .pieGroup {
+	fill-opacity: 0;
+}
+
+#wheel .pieGroup text {
+	fill-opacity: 1.0;
+}
+
+#wheel .pieGroup path {
+	stroke: #403f3f; //white;
+	stroke-width: 1px;
+}
+
+#wheel .pieGroup:hover {
+  cursor: pointer;
+}
+
+#wheel .parent-node {
+  fill: #403f3f; //white;
+  fill-opacity: 1;
+  font-size: 10px;
+}
+
+#wheel .parent-node--selected {
+  fill: #474747 !important;
+  font-weight: bold;
+}
+
+#wheel .pieSegment--selected {
+  fill: hsl(200, 59%, 36%);
+  fill-opacity: 0.5;
+}
+
+#wheel .peoplePieSegment {
+  fill: hsl(65, 67%, 59%) !important;
+  stroke: hsl(65, 67%, 59%) !important;
+  fill-opacity: 1;
+}
+
+
+#wheel .codePieSegment {
+  fill: hsl(200, 67%, 59%) !important;
+  stroke: hsl(200, 67%, 59%) !important;
+  fill-opacity: 1;
+}
+
+
+#wheel .pieSegment--selectedParent {
+  stroke: #c1d72e !important;
+  stroke-width: 2px !important;
+}

@@ -1,0 +1,9 @@
+*[section-layout="hidden"] {
+  display: none !important;
+  transition: visibility 0.1s linear;
+}
+
+*[section-layout="visible"] {
+  display: auto !important;
+  transition: visibility 0.1s linear;
+}

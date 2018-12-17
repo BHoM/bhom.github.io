@@ -1,0 +1,14 @@
+ title: The BHoM - Sustainable code at scale
+ email: eduardo.pignatelli@burohappol.com
+ description: none
+sass:
+  sass_dir: _sass
+ github: [metadata]
+ encoding: UTF-8
+ kramdown:
+   input: GFM
+   hard_wrap: false
+ future: true
+ jailed: false
+ gfm_quirks: paragraph_end
+ repository: voodoo-woodoo/voodoo-woodoo.github.io

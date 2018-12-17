@@ -1,0 +1,26 @@
+<head>
+	{% if jekyll.environment == 'production %'}
+	{% include analytics.html %}
+	{% endif %}
+
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/waffle-grid/dist/waffle-grid.css">
+	
+	<link rel="stylesheet" type="text/css" href="{{ "assets/css/style.css" | relative_url }}">
+
+	<script src="{{ "assets/js/expand.js" | relative_url }}"></script>
+	<script src="{{ "assets/js/typewriter.js" | relative_url }}"></script>
+	<script src="{{ "assets/js/typewrite.js" | relative_url }}"></script>
+	<script src="{{ "assets/js/personify.js" | relative_url }}"></script>
+	<script src="{{ "assets/js/progressBrain.js" | relative_url }}"></script>
+	
+</head>

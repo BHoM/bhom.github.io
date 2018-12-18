@@ -4,19 +4,19 @@ $color-scheme: 'light';
 
 
 /***  Variables  **********************************/
-$h-color: #E72175;
-$b-color: null;
+$color_h: #E72175;
+$color_b: null;
 $font_high: 'Zilla Slab';
 $font_base: 'Open Sans';
-$h-color-link: rgba(252, 51, 89, 0.35);
+$color_h-link: rgba(252, 51, 89, 0.35);
 $back-color: null;
 
 @if $color-scheme == 'light' {
-  $b-color: #211218;
+  $color_b: #211218;
   $back-color: transparent;
 }
 @else if $color-scheme == 'dark' {
-  $b-color: #eee;
+  $color_b: #eee;
   $back-color: #211218;
 }
 
@@ -51,12 +51,22 @@ $break_l: 1400px; /*min-width: 1400px*/
   background-color: #F6F6F6;
   /*background-color: transparent;*/
   padding-top: 60px;
+  z-index: -5;
 }
 
 #what {
   margin-top: 0px;
 }
 
+#footer {
+  background-color: #F6F6F6;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+#footer h5 {
+  margin-top: 0px;
+}
 /**************************************************/
 
 
@@ -67,7 +77,7 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, li, a {
-  color: $b-color;
+  color: $color_b;
 }
 
 
@@ -233,11 +243,13 @@ hr {
 a {
   color: inherit;
   text-decoration: none;
-  border-bottom: 10px solid transparent;
+  border-bottom: 1px solid $color_h;
   display: inline-block;
-  height: 2vmax;
-  transition-duration: 0.2s;
-  transition-delay: 0s;
+  transition-duration: 0.3s;
+}
+
+a:hover {
+  color: $color_h;
 }
 
 ul {
@@ -247,19 +259,20 @@ ul {
 }
 
 li {
-  font-weight: 700;
+  font-weight: 400;
+  height: 1.5vmax;
 }
 
-li a {
-  text-decoration: underline;
-}
-
-li a:hover {
-  color: $h-color;
-  transition-duration: .5s;
-}
 
 /**************************************************/
+
+.black {
+  font-weight: 900;
+}
+
+.bold {
+  font-weight: 700;
+}
 
 .grid {
   width: 100%;
@@ -274,7 +287,7 @@ li a:hover {
 }
 
 .dark {
-  background-color: $b-color;
+  background-color: $color_b;
 }
 
 .dark * {
@@ -282,24 +295,14 @@ li a:hover {
 }
 
 .border-left {
-  margin-left: 0px;
-  border-left: 2px solid #eee;
+  border-left: 1px solid $color_h;
   padding-left: 10px;
-}
-
-.border-left:hover {
-  border-left-color: $h-color;
 }
 
 .border-right {
   margin-right: 0px;
   border-right: 2px solid #eee;
   padding-right: 20px;
-}
-
-.border-right:hover {
-  border-right-color: $h-color;
-  transition-duration: 0.5s;
 }
 
 .cursor {
@@ -311,9 +314,21 @@ li a:hover {
 }
 
 .cursor-logo {
-  height: 8em;
+  height: 5em;
   margin: 0px;
   margin-right: 1em;
+}
+
+@media screen and (min-width: $break_s) {
+  .cursor-logo {
+    height: 7.5em;
+  }
+}
+
+@media screen and (min-width: $break_m) {
+  .cursor-logo {
+    height: 9em;
+  }
 }
 
 /**************************************************/
@@ -330,16 +345,6 @@ li a:hover {
 
 /**************************************************/
 
-.footer {
-  display: flex;
-  justify-content: center;
-  padding: 50px 0px;
-  font-face: $font_base;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 30px;
-}
-
 .footer ul {
   list-style-type: none;
   padding: 0px;
@@ -350,6 +355,27 @@ li a:hover {
   height: 22px;
 }
 
+.copyright {
+  font-size: 12px;
+  height: 18px;
+}
+
+.fas, .fab, .fa {
+  font-size: 1.5em !important;
+  color: $color_h !important;
+  text-decoration: none !important;
+  margin-right: 10px !important;
+}
+
+.fas:hover, .fab:hover, .fa:hover {
+  opacity: 0.5;
+  transition-duration: 0.5s;
+  border: none;
+}
+
+.footer a.noborder {
+  border: 0px solid transparent !important;
+}
 
 /*** Nav  *****************************/
 
@@ -396,7 +422,13 @@ li a:hover {
 img {
   max-width: 100%;
   height: auto;
-  border: 1px solid #000;
+  border: 1px solid transparent;
+}
+
+.nonewline {
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 5;
 }
 
 .space {
@@ -406,20 +438,32 @@ img {
 .circled {
   position: absolute;
   z-index: -1;
-  max-height: 3em;
-  max-width: 130%;
-  transform: translate(-0.3em, -0.5em);
+  max-height: 1.8em;
+  max-width: 110%;
+  transform: translate(-0.4em, -0.3em);
 }
 
 .underlined {
   position: absolute;
   z-index: -1;
-  max-height: 1em;
-  max-width: 100%;
-  transform: translateY(1em);
+  max-height: 0.5em;
+  max-width: 10em;
+  transform: translateY(0.8em);
 }
 
-/*** Scribbles  *****************************/
+.annotated {
+  position: absolute;
+  z-index: -1;
+  max-height: 2.5em;
+  transform: translateY(-0.6em);
+}
 
+/*** Margins  *****************************/
 
+.nomargin-left {
+  margin-left: 0px;
+}
 
+.nopadding-left {
+  padding-left: 0px;
+}

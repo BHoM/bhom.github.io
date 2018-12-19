@@ -4,7 +4,7 @@ $color-scheme: 'light';
 
 
 /***  Variables  **********************************/
-$color_h: #E72175;
+$color_h: #FE224A;
 $color_b: null;
 $font_high: 'Zilla Slab';
 $font_base: 'Open Sans';
@@ -198,8 +198,6 @@ h5 {
 }
 
 
-
-
 h6 {
   font-style: italic;
   margin-top: 0px;
@@ -236,7 +234,7 @@ p {
 
 
 hr {
-  width: 50%;
+  width: 100%;
   border-top: 1px solid #eee;
 }
 
@@ -333,26 +331,9 @@ li {
 
 /**************************************************/
 
-.logo img {
-  height: 6.25rem;
-}
-
-@media screen and (max-width: 760px) {
-  .logo img {
-    height: 4rem;
-  }
-}
-
-/**************************************************/
-
 .footer ul {
   list-style-type: none;
   padding: 0px;
-}
-
-.wikilinks a {
-  text-decoration: none;
-  height: 22px;
 }
 
 .copyright {
@@ -361,7 +342,7 @@ li {
 }
 
 .fas, .fab, .fa {
-  font-size: 1.5em !important;
+  font-size: 1.2em !important;
   color: $color_h !important;
   text-decoration: none !important;
   margin-right: 10px !important;
@@ -438,7 +419,7 @@ img {
 .circled {
   position: absolute;
   z-index: -1;
-  max-height: 1.8em;
+  max-height: 2.1em;
   max-width: 110%;
   transform: translate(-0.4em, -0.3em);
 }
@@ -446,9 +427,9 @@ img {
 .underlined {
   position: absolute;
   z-index: -1;
-  max-height: 0.5em;
+  max-height: 0.7em;
   max-width: 10em;
-  transform: translateY(0.8em);
+  transform: translateY(1em);
 }
 
 .annotated {
@@ -466,4 +447,23 @@ img {
 
 .nopadding-left {
   padding-left: 0px;
+}
+
+/*** Buttons  *****************************/
+
+button {
+  background-color: transparent;
+  border: 0px;
+  border-bottom: 1px solid $color_h;
+  padding: 8px 25px;
+  font-family: $font_base;
+  font-weight: 800;
+}
+
+button:hover {
+  border-color: $color_h;
+}
+
+.noborder {
+  border: 0px;
 }

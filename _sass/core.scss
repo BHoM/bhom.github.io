@@ -27,7 +27,6 @@ $break_s: 760px; /*min-width: 760px*/
 $break_m: 1000px; /*min-width: 1000px*/
 $break_l: 1400px; /*min-width: 1400px*/
 
-
 /*** IDs  *****************************************/
 
 #why {
@@ -48,13 +47,13 @@ $break_l: 1400px; /*min-width: 1400px*/
 
 @media screen and (min-width: $break_s) {
   #why div.w-fixed {
-    width: 450px;
+    width: 500px;
   }
 }
 
 @media screen and (min-width: $break_m) {
   #why div.w-fixed {
-    width: 650px;
+    width: 700px;
   }
 }
 
@@ -72,7 +71,7 @@ $break_l: 1400px; /*min-width: 1400px*/
 
 #footer {
   background-color: #F6F6F6;
-  padding-top: 1.875rem;
+  padding-top: 3rem;
   padding-bottom: 1.875rem;
 }
 
@@ -249,6 +248,20 @@ p {
 }
 
 
+ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  margin-block-start: 10px;
+  font-size: 13.3px;
+  font-size: 0.833rem; 
+  line-height: 28px;
+  line-height: 1.7rem;
+}
+
+li {
+  font-weight: 800;
+}
+
 hr {
   width: 50%;
   border-top: 1px solid #eee;
@@ -264,17 +277,6 @@ a {
 
 a:hover {
   color: $color_h;
-}
-
-ul {
-  list-style-type: none;
-  padding-inline-start: 0px;
-  margin-block-start: 0px;
-}
-
-li {
-  font-weight: 400;
-  /*height: 1.5vmax;*/
 }
 
 

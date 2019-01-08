@@ -32,7 +32,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/bhom.xyz/?source=pwa",
+  "start_url": "./?source=pwa",
   "background_color": "#211218",
   "display": "standalone",
   "scope": "/bhom/",

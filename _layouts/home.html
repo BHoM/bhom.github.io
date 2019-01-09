@@ -2,11 +2,10 @@
 <html lang="en-gb">
 {% include head.html %}
 <body>
-	<script>
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/service-worker.js')
-		}
-	</script>
+	
+	{% include analytics.html %}
+	{% include service-worker.html %}
+
 	<div class="grid">
 		{% include why.html %}
 		<hr>

@@ -469,7 +469,7 @@ img {
 
 /*** Buttons  *****************************/
 
-button {
+a.button-link {
   background-color: transparent;
   border: 0px;
   border-bottom: 1px solid $color_h;
@@ -478,7 +478,7 @@ button {
   font-weight: 800;
 }
 
-button:hover {
+a.button-link:hover {
   border-color: $color_h;
 }
 

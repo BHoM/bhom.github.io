@@ -7,7 +7,11 @@ TO INSTALL THE WEBSITE: (Yes, you need to install some tools to see it)
 1. Install a Ruby develoment environment from:
 https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3-1/rubyinstaller-devkit-2.5.3-1-x64.exe
 
-2. Open a **NEW** cmd to let the updates on the %PATH% variable be effective and run: 
+
+1. delete the Gemfile.lock file  https://stackoverflow.com/questions/47026174/find-spec-for-exe-cant-find-gem-bundler-0-a-gemgemnotfoundexception 
+
+
+1. Open a **NEW** cmd to let the updates on the %PATH% variable be effective and run: 
 	`gem install jekyll bundler`
 
 This should be enough, but for a detailed guide on how to install Jekyll you can see here:

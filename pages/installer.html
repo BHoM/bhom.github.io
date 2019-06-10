@@ -2,14 +2,20 @@
 permalink: /installer/
 ---
 <head>
+	
+	{% include analytics.html %}
+
 	<script>
 		(function redirect() {
+			gtag('event', 'download', {'transport': 'beacon', 'event_action': 'click', 'event_category': 'download', 'event_label': 'installer'});
+			gtag('event', 'page_view', {'transport': 'beacon'});
 			window.location = "https://bhom.xyz/assets/installers/BHoM_v2.2.beta.0.exe";
 			setTimeout(function(){
 				window.location = "https://github.com/BHoM/documentation/wiki";
 			}, 500);
 		})();
 	</script>
+
 </head>
 <body>
 

@@ -21,7 +21,7 @@ https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3
    gem install jekyll bundler
    ```
    
-   This should install both Bundler and Jekyll.
+   This should install both [Bundler](https://bundler.io/) (a Ruby package manager) and [Jekyll](https://jekyllrb.com/) (a Ruby package, here used to spawn a localhost).
 
 This should be enough for the installation.
 

@@ -39,7 +39,7 @@ For more info on how to install Jekyll, [check its docs](https://jekyllrb.com/do
    `--open-url` should automatically open the website in your default browser;
    `--force_polling` forces watch to use polling, to recognise and update code changes.
     
-If 2. didn't open automatically a browser windows, navigate to http://localhost:4000.
+   If 2. didn't open automatically a browser windows, navigate to http://localhost:4000.
 
 3. To be sure that the website has been refreshed, use Force Refresh instead of a simple refresh to [bypass the browser cache](https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache). 
 Force Refresh can be done in most browser by pressing `Ctrl+F5`.

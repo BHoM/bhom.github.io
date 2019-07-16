@@ -22,6 +22,8 @@ https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3
    ```
    
    This should install both [Bundler](https://bundler.io/) (a Ruby package manager) and [Jekyll](https://jekyllrb.com/) (a Ruby package, here used to spawn a localhost).
+   
+   If you incur in any trouble during this step, try installing the two tools separately, running first `gem install bundler` and then `gem install jekyll`.
 
 This should be enough for the installation.
 
@@ -29,7 +31,9 @@ For more info on how to install Jekyll, [check its docs](https://jekyllrb.com/do
 
 
 ## Launch the website on localhost
-1. Open a cmd in the location of this markdown text file
+1. Open a cmd in the location of this markdown text file (the root of this cloned repo).
+   
+   In Windows, you can do that by going in this cloned repo, keep Shift pressed, then right click and select `Open command prompt here`.
 
 2. Run:
    ```

@@ -14,7 +14,7 @@ https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.5.3
    (This step is needed because of [this]( https://stackoverflow.com/questions/47026174/find-spec-for-exe-cant-find-gem-bundler-0-a-gemgemnotfoundexception).)
 
 
-1. Open a **NEW** cmd prompt, to make sure that the updates on the %PATH% environemnt variable are effective.
+1. Open a **NEW** cmd prompt, to make sure that the updates on the %PATH% environment variable are effective.
 
 1. Run:
    ```

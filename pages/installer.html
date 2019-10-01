@@ -9,7 +9,7 @@ permalink: /installer/
 		(function redirect() {
 			gtag('event', 'download', {'transport_type': 'beacon', 'event_action': 'click', 'event_category': 'download', 'event_label': 'installer'});
 			gtag('event', 'page_view', {'transport_type': 'beacon'});
-			window.location = "{{ 'assets/installers/BHoM_v2.3.beta.0.msi' | relative_url }}"
+			window.location = "{{ 'assets/installers/BHoM_v2.4.beta.0.msi' | relative_url }}"
 			setTimeout(function(){
 				window.location = "https://github.com/BHoM/documentation/wiki";
 			}, 500);

@@ -1,0 +1,46 @@
+<div class="col-md-8 col-md-offset-1 ng-hide" ng-show="displayEngine">
+	<div class="row font-courier-prime">
+		<div class="col-md-6">
+			<h3 class="left-hand-header bhom-red">Engine</h3>
+		</div>
+		<div class="col-md-6 text-right">
+			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+		</div>
+	</div>
+
+	<div class="row font-zilla-slab">
+		<div class="col-md-12"><span class="pre-object-namespace object-name">{{currentEngine.name}}</span></div>
+	</div>
+
+	<div class="property-table font-open-sans">
+		<div class="method-table-row ng-hide" ng-show="currentEngine.methods.length == 0">
+			<div class="col-xs-12 text-center">
+				{{currentEngine.name}} has no methods associated with it
+			</div>
+		</div>
+
+		<div class="property-table-row" ng-repeat="x in currentEngine.methods">		
+			<div class="row property-table-cell">
+				<div class="col-md-12">
+					<span class="object-name can-click" ng-click="displayEngineMethods(x)"><span class="fa {{x.showEngineMethods ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{x[0]}}</span>
+				</div>
+			</div>
+
+			<div class="row method-table table-cel level-5-indent ng-hide" ng-show="x.showEngineMethods">
+				<div class="table-header">
+					<div class="col-md-3 table-header">Name</div>
+					<div class="col-md-9 table-header">Description</div>
+				</div>
+
+				<div class="table-row can-click" ng-click="goToMethod(y)" ng-repeat="y in x[1]">
+					<div class="col-md-3">
+						{{y.memberName}}
+					</div>
+					<div class="col-md-9">
+						{{y.description}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

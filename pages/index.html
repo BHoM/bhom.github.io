@@ -1,0 +1,108 @@
+---
+permalink: /api/
+---
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>BHoM API</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+
+		<!-- Angular -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+		<!-- Toastr -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.tpls.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-toastr/2.1.1/angular-toastr.min.css">
+
+	    <!-- Fonts -->
+	    <link href='//fonts.googleapis.com/css?family=Courier+Prime' rel='stylesheet' type='text/css'>
+	    <link href='//fonts.googleapis.com/css?family=Zilla+Slab' rel='stylesheet' type='text/css'>
+	    <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+	    <!-- JS -->
+	    <script src="js/app.js"></script>
+		<script src="js/factory.js"></script>
+		<script src="js/index.js"></script>
+
+		<!-- CSS overrides -->
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body ng-app="bhomapi" ng-controller="indexController">
+		<div class="api-container">
+			<div class="row">
+				<span class="fa fa-spinner fa-5x fa-fw text-center ng-hide" ng-show="isLoading"></span>
+			</div>
+
+			<div class="row ng-hide" ng-show="!isLoading">
+				<div ng-include="'navigation.html'"></div>
+
+				<div class="col-md-9 ng-hide" ng-show="displaySearch">
+					<!-- Main content -->
+					<div class="col-md-12 text-center">
+						<img src="img/main-logo.png" class="main-logo {{searchRunning ? 'margin-top-0' : ''}}" />
+					</div>
+
+					<div class="col-md-4 col-md-offset-4">
+						<div class="row main-search-bar">
+							<input class="form-control main-search" type="text" ng-model="mainSearch.searchTerm" ng-keypress="runSearchKeyPress($event)" />
+						</div>
+
+						<div class="row main-search-buttons">
+							<div class="col-md-6">
+								<button class="font-zilla-slab font-18 form-control btn btn-success search-btn" ng-click="runSearch()">BHoM Search</button>
+							</div>
+
+							<div class="col-md-6">
+								<button class="font-zilla-slab font-18 form-control btn btn-info surprise-btn" ng-click="surpriseMe()">Surprise me!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-8 col-md-offset-1 font-open-sans ng-hide" ng-show="displayResults">
+					<div class="row">
+						<div class="col-md-6">
+							<input class="form-control search-box-top margin-top-10 main-search" type="text" ng-model="mainSearch.searchTerm" ng-keypress="runSearchKeyPress($event)" />
+						</div>
+						<div class="col-md-6 text-right">
+							<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+						</div>
+					</div>
+
+					<div class="row">
+						<span class="fa fa-spinner fa-5x fa-fw text-center ng-hide" ng-show="loadingSearch"></span>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							You searched for <span class="font-bold">{{mainSearch.searchTerm}}</span> and we found these results:
+						</div>
+					</div>
+
+					<div class="search-result" ng-repeat="x in searchResults">
+						<div class="search-result-name can-click" ng-click="goToResult(x)">
+							{{x.namespace}}.{{x.memberName}}
+						</div>
+
+						<div class="search-result-description">
+							<span class="object-name">{{x.description}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

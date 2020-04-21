@@ -12,4 +12,3 @@ sass:
  jailed: false
  gfm_quirks: paragraph_end
  repository: voodoo-woodoo/voodoo-woodoo.github.io
- include: ['_pages']

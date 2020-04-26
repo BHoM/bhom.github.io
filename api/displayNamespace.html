@@ -25,7 +25,9 @@
 			</div>
 
 			<div class="col-sm-6 table-cell property-table-cell">
-				{{x.description}}
+				<p ng-repeat="a in x.descriptionParts">
+					{{a}}
+				</p>
 			</div>
 		</div>
 	</div>

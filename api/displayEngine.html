@@ -37,7 +37,9 @@
 						{{y.memberName}}
 					</div>
 					<div class="col-md-9">
-						{{y.description}}
+						<p ng-repeat="a in y.descriptionParts">
+							{{a}}
+						</p>
 					</div>
 				</div>
 			</div>

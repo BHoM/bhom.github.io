@@ -11,7 +11,11 @@
 	<div class="row font-open-sans">
 		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> : <span class="can-click inheritance-name" ng-repeat="x in currentObject.inheritance" ng-click="goToObject(x)">{{x.memberName}}, </span></div>
 
-		<div class="col-md-12 object-description">{{currentObject.description}}</div>
+		<div class="col-md-12 object-description">
+			<p ng-repeat="a in currentObject.descriptionParts">
+				{{a}}
+			</p>
+		</div>
 
 		<div class="col-md-12 object-properties can-click font-bold font-zilla-slab margin-top-3" ng-click="displayObjectProperties(currentObject)"><span class="fa {{currentObject.displayProperties ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Object Properties</div>
 	</div>

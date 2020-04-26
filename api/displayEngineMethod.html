@@ -11,7 +11,11 @@
 	<div class="row font-open-sans">
 		<div class="col-md-12 pre-object-namespace"><span class="pre-object-namespace">{{currentMethod.namespace}}</span>.<span class="object-name">{{currentMethod.className}}</span></div>
 		<div class="col-md-12 object-name">{{currentMethod.memberName}}</div>
-		<div class="col-md-12 object-description">{{currentMethod.description}}</div>
+		<div class="col-md-12 object-description">
+			<p ng-repeat="a in currentMethod.descriptionParts">
+				{{a}}
+			</p>
+		</div>
 		<div class="col-md-12 object-properties can-click font-bold font-zilla-slab margin-top-3" ng-click="displayMethodInputs(currentMethod)"><span class="fa {{currentMethod.displayInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Inputs</div>
 	</div>
 
@@ -29,7 +33,11 @@
 					<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
 					<div class="col-sm-3 table-cell-inner"><span class="can-click" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
 					<div class="col-sm-2 table-cell-inner">{{y.isRequired}}</div>
-					<div class="col-sm-4 table-cell-inner">{{y.description}}</div>
+					<div class="col-sm-4 table-cell-inner">
+						<p ng-repeat="a in y.descriptionParts">
+							{{a}}
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

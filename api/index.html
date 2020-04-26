@@ -95,7 +95,11 @@
 						</div>
 
 						<div class="search-result-description">
-							<span class="object-name">{{x.description}}</span>
+							<span class="object-name">
+								<p ng-repeat="a in x.descriptionParts">
+									{{a}}
+								</p>
+							</span>
 						</div>
 					</div>
 				</div>

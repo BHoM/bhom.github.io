@@ -24,10 +24,29 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 	$scope.methods = [];
 	$scope.objects = [];
 
+	$scope.displayMobileObjectNavSetting = false;
+	$scope.displayMobileEngineNavSetting = false
+
 	$scope.handleFailure = function(response)
 	{
 		$scope.isLoading = false;
 		failureHandling.handleFailure(response, $window);
+	};
+
+	$scope.goHome = function()
+	{
+		$scope.isLoading = true;
+		$window.location.href = "/api";
+	};
+
+	$scope.displayMobileObjectNav = function()
+	{
+		navigationFactory.displayMobileObjectNav($scope);
+	};
+
+	$scope.displayMobileEngineNav = function()
+	{
+		navigationFactory.displayMobileEngineNav($scope);
 	};
 
 	$scope.showObjects = function()
@@ -137,6 +156,8 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 	$scope.goToObject = function(object)
 	{
+		if(object.isInterface == 1) return;
+
 		$location.search('namespace', object.namespace);
 		$location.search('object', object.memberName);
 	};

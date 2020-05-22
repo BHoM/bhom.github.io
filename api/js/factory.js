@@ -76,3 +76,17 @@ app.factory('apiHelpers', function() {
 		},
 	};
 });
+
+app.factory('navigationFactory', function() {
+	return {
+		displayMobileObjectNav : function($scope) {
+			$scope.displayMobileObjectNavSetting = !$scope.displayMobileObjectNavSetting;
+			$scope.displayMobileEngineNavSetting = false;
+		},
+
+		displayMobileEngineNav : function($scope) {
+			$scope.displayMobileObjectNavSetting = false;
+			$scope.displayMobileEngineNavSetting = !$scope.displayMobileEngineNavSetting;
+		},
+	};
+});

@@ -1,4 +1,4 @@
-app.controller('indexController', function($scope, $window, $http, $filter, notificationFactory, failureHandling, $location, apiHelpers) {
+app.controller('indexController', function($scope, $window, $http, $filter, notificationFactory, failureHandling, $location, apiHelpers, navigationFactory) {
 
 	$scope.isLoading = true;
 
@@ -27,10 +27,29 @@ app.controller('indexController', function($scope, $window, $http, $filter, noti
 
 	$scope.runningSearch = false;
 
+	$scope.displayMobileObjectNavSetting = false;
+	$scope.displayMobileEngineNavSetting = false
+
 	$scope.handleFailure = function(response)
 	{
 		$scope.isLoading = false;
 		failureHandling.handleFailure(response, $window);
+	};
+
+	$scope.displayMobileObjectNav = function()
+	{
+		navigationFactory.displayMobileObjectNav($scope);
+	};
+
+	$scope.displayMobileEngineNav = function()
+	{
+		navigationFactory.displayMobileEngineNav($scope);
+	};
+
+	$scope.goHome = function()
+	{
+		$scope.isLoading = true;
+		$window.location.href = "/api";
 	};
 
 	$scope.showObjects = function()

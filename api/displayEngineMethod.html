@@ -1,19 +1,26 @@
 <div class="col-md-8 col-md-offset-1 ng-hide" ng-show="displayEngineMethod">
 	<div class="row font-courier-prime">
-		<div class="col-md-6">
+		<div class="hidden-xs hidden-sm col-md-6">
 			<h3 class="left-hand-header bhom-red">Engine</h3>
 		</div>
-		<div class="col-md-6 text-right">
+		<div class="hidden-xs hidden-sm col-md-6 text-right">
 			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+		</div>
+
+		<div class="col-xs-6">
+			<h3 class="left-hand-header bhom-red">Engine</h3>
+		</div>
+		<div class="col-xs-6 text-right">
+			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
 		</div>
 	</div>
 
 	<div class="row font-open-sans">
 		<div class="col-md-12 pre-object-namespace"><span class="pre-object-namespace">{{currentMethod.namespace}}</span>.<span class="object-name">{{currentMethod.className}}</span></div>
-		<div class="col-md-12 object-name">{{currentMethod.memberName}}</div>
-		<div class="col-md-12 object-description">
+		<div class="col-md-12"><span class="object-name">{{currentMethod.memberName}}</span></div>
+		<div class="col-md-12">
 			<p ng-repeat="a in currentMethod.descriptionParts">
-				{{a}}
+				<span class="object-description">{{a}}</span>
 			</p>
 		</div>
 		<div class="col-md-12 object-properties can-click font-bold font-zilla-slab margin-top-3" ng-click="displayMethodInputs(currentMethod)"><span class="fa {{currentMethod.displayInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Inputs</div>
@@ -31,8 +38,8 @@
 
 				<div class="row method-input-row lg-background" ng-repeat="y in currentMethod.inputs">
 					<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
-					<div class="col-sm-3 table-cell-inner"><span class="can-click" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
-					<div class="col-sm-2 table-cell-inner">{{y.isRequired}}</div>
+					<div class="col-sm-3 table-cell-inner"><span class="{{y.isInterface == 1 ? '' : 'can-click'}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
+					<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
 					<div class="col-sm-4 table-cell-inner">
 						<p ng-repeat="a in y.descriptionParts">
 							{{a}}

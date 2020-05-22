@@ -2,6 +2,7 @@ body
 {
 	font-size: 20px;
 	margin-top: 1%;
+	word-wrap: break-word;
 }
 
 h1
@@ -100,6 +101,13 @@ h4
 	margin-top: 3%;
 }
 
+.top-right-logo-xs
+{
+	width: 20%;
+	margin-right: 10%;
+	margin-top: 3%;
+}
+
 .main-search-bar
 {
 	margin-top: 10%;
@@ -110,6 +118,11 @@ h4
 	margin-top: 5%;
 	margin-left: -30px;
 	margin-right: -30px;
+}
+
+.mobile-nav
+{
+	z-index: 99999;
 }
 
 .search-btn
@@ -265,6 +278,13 @@ h4
 .method-table-cell
 {
 	padding: 1%;
+	margin-bottom: 1%;
+	padding-left: 5%;
+}
+
+.method-table-header-cell
+{
+	padding: 1%;
 }
 
 .method-input-row
@@ -309,4 +329,13 @@ h4
 	font-family: "Zilla Slab";
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.icon-bar
+{
+	display: block;
+  	width: 22px;
+  	height: 2px;
+  	background-color: #cccccc;
+  	border-radius: 1px;
 }

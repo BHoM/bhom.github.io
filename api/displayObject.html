@@ -1,19 +1,26 @@
 <div class="col-md-8 col-md-offset-1 ng-hide" ng-show="displayObject">
 	<div class="row font-courier-prime">
-		<div class="col-md-6">
+		<div class="hidden-xs hidden-sm col-md-6">
 			<h3 class="left-hand-header bhom-red">Object Model</h3>
 		</div>
-		<div class="col-md-6 text-right">
+		<div class="hidden-xs hidden-sm col-md-6 text-right">
 			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+		</div>
+
+		<div class="col-xs-6">
+			<h3 class="left-hand-header bhom-red">Object Model</h3>
+		</div>
+		<div class="col-xs-6 text-right">
+			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
 		</div>
 	</div>
 
 	<div class="row font-open-sans">
-		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> : <span class="can-click inheritance-name" ng-repeat="x in currentObject.inheritance" ng-click="goToObject(x)">{{x.memberName}}, </span></div>
+		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> : <span ng-repeat="x in currentObject.inheritance" class="{{x.isInterface == 1 ? '' : 'can-click'}} inheritance-name" ng-click="goToObject(x)">{{x.memberName}}, </span></div>
 
-		<div class="col-md-12 object-description">
+		<div class="col-md-12">
 			<p ng-repeat="a in currentObject.descriptionParts">
-				{{a}}
+				<span class="object-description">{{a}}</span>
 			</p>
 		</div>
 
@@ -60,7 +67,7 @@
 
 			<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
 				<div class="table-row">
-					<div class="col-sm-3 table-cell method-table-cell can-click" ng-click="showHideMethodInputs(x)">
+					<div class="col-sm-3 table-cell method-table-header-cell can-click" ng-click="showHideMethodInputs(x)">
 						<span class="fa {{x.canViewInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{x.memberName}}
 					</div>
 
@@ -73,42 +80,44 @@
 					</div>
 				</div>
 
-				<div class="level-5-indent lg-background">
-					<div class="ng-hide table-cell method-table-cell" ng-show="x.canViewInputs">
-						<div class="row">
-							<div class="col-sm-3 table-cell-inner table-header">Inputs</div>
-							<div class="col-sm-3 table-cell-inner table-header">Type</div>
-							<div class="col-sm-2 table-cell-inner table-header">Is Required</div>
-							<div class="col-sm-4 table-cell-inner table-header">Description</div>
-						</div>
+				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
+					<div class="row">
+						<div class="col-sm-3 table-cell-inner table-header">Inputs</div>
+						<div class="col-sm-3 table-cell-inner table-header">Type</div>
+						<div class="col-sm-2 table-cell-inner table-header">Is Required</div>
+						<div class="col-sm-4 table-cell-inner table-header">Description</div>
+					</div>
 
-						<div class="row" ng-repeat="y in x.inputs">
-							<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
-							<div class="col-sm-3 table-cell-inner"><span class="can-click" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
-							<div class="col-sm-2 table-cell-inner">{{y.isRequired}}</div>
-							<div class="col-sm-4 table-cell-inner">{{(y.description == "" ? 'N/A' : y.description)}}</div>
-						</div>
+					<div class="row" ng-repeat="y in x.inputs">
+						<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
+						<div class="col-sm-3 table-cell-inner"><span class="{{y.isInterface == 1 ? '' : 'can-click'}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
+						<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
+						<div class="col-sm-4 table-cell-inner">{{(y.description == "" ? 'N/A' : y.description)}}</div>
+					</div>
+				</div>
 
-						<div class="row table-inner-margin">
-							<div class="col-sm-3 table-cell-inner table-header">Outputs</div>
-							<div class="col-sm-3 table-cell-inner table-header">Type</div>
-							<div class="col-sm-2 table-cell-inner"></div>
-							<div class="col-sm-4 table-cell-inner table-header">Description</div>
-						</div>
+				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
+					<div class="row table-inner-margin">
+						<div class="col-sm-3 table-cell-inner table-header">Outputs</div>
+						<div class="col-sm-3 table-cell-inner table-header">Type</div>
+						<div class="col-sm-2 table-cell-inner"></div>
+						<div class="col-sm-4 table-cell-inner table-header">Description</div>
+					</div>
 
-						<div class="row">
-							<div class="col-sm-3 table-cell-inner"></div>
-							<div class="col-sm-3 table-cell-inner">{{x.outputs.namespace}}.{{x.outputs.memberName}}</div>
-							<div class="col-sm-2 table-cell-inner"></div>
-							<div class="col-sm-4 table-cell-inner">{{(x.outputs.description == "" ? 'N/A' : x.outputs.description)}}</div>
-						</div>
+					<div class="row">
+						<div class="col-sm-3 table-cell-inner"></div>
+						<div class="col-sm-3 table-cell-inner">{{x.outputs.namespace}}.{{x.outputs.memberName}}</div>
+						<div class="col-sm-2 table-cell-inner"></div>
+						<div class="col-sm-4 table-cell-inner">{{(x.outputs.description == "" ? 'N/A' : x.outputs.description)}}</div>
+					</div>
+				</div>
 
-						<div class="row table-inner-margin">
-							<div class="col-sm-3 table-cell-inner table-header">Assembly</div>
-							<div class="col-sm-3 table-cell-inner">{{x.assemblyName}}</div>
-							<div class="col-sm-2 table-cell-inner"></div>
-							<div class="col-sm-3 table-cell-inner"></div>
-						</div>
+				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
+					<div class="row table-inner-margin">
+						<div class="col-sm-3 table-cell-inner table-header">Assembly</div>
+						<div class="col-sm-3 table-cell-inner">{{x.assemblyName}}</div>
+						<div class="col-sm-2 table-cell-inner"></div>
+						<div class="col-sm-3 table-cell-inner"></div>
 					</div>
 				</div>
 			</div>

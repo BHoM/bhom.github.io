@@ -1,28 +1,24 @@
 <div class="col-xs-12 col-sm-12 hidden-md hidden-lg mobile-nav">
 	<div class="col-xs-4 text-center">
-		<button class="btn btn-success search-btn" ng-click="displayMobileObjectNav()">oM</button>
+		<a href="/api" ng-click="goHome()"><h3 class="font-courier-prime"><span class="bhom-black">BHoM</span><span class="bhom-red">.API</span></h3></a>
 	</div>
 
-	<div class="col-xs-4 text-center">
-		<button class="btn btn-success surprise-btn" ng-click="displayMobileEngineNav()">Engine</button>
-	</div>
-
-	<div class="col-xs-4 text-center">
-		<a href="/api" class="btn btn-success search-btn" ng-click="goHome()">Search</a>
-	</div>
-
-	<div class="col-xs-12 ng-hide" ng-show="displayMobileObjectNavSetting">
+	<div class="col-xs-4 text-center margin-top-3">
 		<span class="can-click font-bold" ng-click="showObjects()"><span class="fa {{expandObjects ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> oM</span>
-		<div class="row can-click ng-hide navigation-item" ng-show="expandObjects" ng-repeat="x in navigationObjectModel" ng-click="goToObjectNamespace(x)">
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>
 	</div>
 
-	<div class="col-xs-12 ng-hide" ng-show="displayMobileEngineNavSetting">
+	<div class="col-xs-4 text-center margin-top-3">
 		<span class="can-click font-bold" ng-click="showEngine()"><span class="fa {{expandEngine ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Engine</span>
-		<div class="row can-click ng-hide navigation-item" ng-show="expandEngine" ng-repeat="x in navigationEngines" ng-click="goToEngineNamespace(x)">
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>
+	</div>
+
+	<div class="row margin-top-3"></div>
+
+	<div class="row can-click ng-hide navigation-item" ng-show="expandObjects" ng-repeat="x in navigationObjectModel" ng-click="goToObjectNamespace(x)">
+		<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
+	</div>
+
+	<div class="row can-click ng-hide navigation-item" ng-show="expandEngine" ng-repeat="x in navigationEngines" ng-click="goToEngineNamespace(x)">
+		<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
 	</div>
 </div>
 

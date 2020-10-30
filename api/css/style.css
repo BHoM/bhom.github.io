@@ -46,6 +46,11 @@ h4
 	font-size: 18px;
 }
 
+.font-14
+{
+	font-size: 14px;
+}
+
 .font-bold
 {
 	font-weight: bold;
@@ -253,6 +258,7 @@ h4
 .object-description
 {
 	background-color: #FFD700;
+	font-size: 14px;
 }
 
 .table-cell

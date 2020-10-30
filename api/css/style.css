@@ -206,6 +206,12 @@ h4
 .can-click
 {
  	cursor: pointer;
+ 	font-weight: bold;
+}
+
+.can-click:hover
+{
+	color: #FE224A;
 }
 
 .fa-plus-circle

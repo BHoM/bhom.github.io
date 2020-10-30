@@ -43,7 +43,7 @@
 				{{x.type}}
 			</div>
 
-			<div class="col-sm-8 property-table-cell">
+			<div class="col-sm-8 property-table-cell font-14">
 				{{x.description}}
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 						{{x.className}}
 					</div>
 
-					<div class="col-sm-6 table-cell">
+					<div class="col-sm-6 table-cell font-14">
 						{{x.description}}
 					</div>
 				</div>
@@ -92,7 +92,7 @@
 						<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
 						<div class="col-sm-3 table-cell-inner"><span class="{{y.isInterface == 1 ? '' : 'can-click'}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
 						<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
-						<div class="col-sm-4 table-cell-inner">{{(y.description == "" ? 'N/A' : y.description)}}</div>
+						<div class="col-sm-4 table-cell-inner font-14">{{(y.description == "" ? 'N/A' : y.description)}}</div>
 					</div>
 				</div>
 

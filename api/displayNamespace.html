@@ -31,9 +31,15 @@
 				<span class="pre-object-namespace">{{x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)}}</span>.<span class="object-name">{{x.memberName}}</span>
 			</div>
 
-			<div class="col-sm-6 table-cell property-table-cell font-14">
+			<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="!isEnum(x)">
 				<p ng-repeat="a in x.descriptionParts">
 					{{a}}
+				</p>
+			</div>
+
+			<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="isEnum(x)">
+				<p>
+					This is an enum with {{(x.descriptionParts.length - x.descriptionParts.indexOf("Enum values: ")) - 1}} options
 				</p>
 			</div>
 		</div>

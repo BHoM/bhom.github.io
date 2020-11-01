@@ -40,7 +40,8 @@
 			</div>
 
 			<div class="col-sm-2 property-table-cell">
-				{{x.type}}
+				<span class="can-click ng-hide" ng-show="x.namespace.startsWith('BH.oM')" ng-click="goToType(x)">{{x.type}}</span>
+				<span class="ng-hide" ng-show="!x.namespace.startsWith('BH.oM')">{{x.type}}</span>
 			</div>
 
 			<div class="col-sm-8 property-table-cell font-14">

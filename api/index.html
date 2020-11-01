@@ -102,9 +102,10 @@
 
 						<div class="search-result-description">
 							<span class="object-description font-14">
-								<p ng-repeat="a in x.descriptionParts">
+								<p ng-repeat="a in x.descriptionParts | limitTo:3">
 									{{a}}
 								</p>
+								<p class="ng-hide" ng-show="x.descriptionParts.length > 3">...</p>
 							</span>
 						</div>
 					</div>

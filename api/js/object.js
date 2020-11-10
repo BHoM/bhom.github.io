@@ -169,7 +169,11 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 			return;
 
 		$location.search('namespace', type.namespace);
-		$location.search('object', type.memberName);
+
+		if(type.type != undefined)
+			$location.search('object', type.type);
+		else
+			$location.search('object', type.memberName);
 	};
 
 	$scope.isEnum = function(type)

@@ -16,7 +16,14 @@
 	</div>
 
 	<div class="row font-open-sans">
-		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> : <span ng-repeat="x in currentObject.inheritance" class="{{x.isInterface == 1 ? '' : 'can-click'}} inheritance-name" ng-click="goToObject(x)">{{x.memberName}}, </span></div>
+		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> :
+			<span ng-repeat="x in currentObject.inheritance" class="inheritance-name">
+				<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x)">{{x.memberName}}</span>
+				<span class="ng-hide" ng-show="x.inheritances.length > 0">
+					[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
+				</span>,
+			</span>
+	</span></div>
 
 		<div class="col-md-12">
 			<p ng-repeat="a in currentObject.descriptionParts">
@@ -40,8 +47,10 @@
 			</div>
 
 			<div class="col-sm-2 property-table-cell">
-				<span class="can-click ng-hide" ng-show="x.namespace.startsWith('BH.oM')" ng-click="goToType(x)">{{x.type}}</span>
-				<span class="ng-hide" ng-show="!x.namespace.startsWith('BH.oM')">{{x.type}}</span>
+				<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(x)">{{x.type}}</span>
+				<span class="ng-hide" ng-show="x.inheritances.length > 0">
+					[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
+				</span>
 			</div>
 
 			<div class="col-sm-8 property-table-cell font-14">

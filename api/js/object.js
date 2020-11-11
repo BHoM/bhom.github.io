@@ -119,6 +119,11 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		object.displayMethods = !object.displayMethods;
 	};
 
+	$scope.displayImplementedTypes = function(object)
+	{
+		object.displayImplementedBy = !object.displayImplementedBy;
+	};
+
 	$scope.displayAdapterMethods = function(object)
 	{
 		object.displayAdapters = !object.displayAdapters;
@@ -205,7 +210,11 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 		var tuples = [];
 
-		for (var key in arr) tuples.push([key, arr[key]]);
+		if(arr.length == 0)
+			return tuples;
+
+		for (var key in arr)
+			tuples.push([key, arr[key]]);
 
 		tuples.sort(function(a, b) {
 			if(a[0].includes(coreNS)) return -1;
@@ -226,11 +235,51 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		tuples.splice(0, 0, t);
 
 		tuples.forEach(function(obj) {
-			obj[1].sort(function(a, b) {
+			if(obj != undefined)
+			{
+				obj[1].sort(function(a, b) {
+					if(a.memberName < b.memberName) return -1;
+					if(a.memberName > b.memberName) return 1;
+					return 0;
+				});
+			}
+		});
+
+		return tuples;
+	};
+
+	$scope.groupedImplementedByNamespace = function(array, coreNS)
+	{
+		var arr = [];
+
+		array.forEach(function(obj) {
+			var ns = obj.namespace;
+			if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
+				ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
+
+			if(arr[ns] == undefined)
+				arr[ns] = [];
+
+			arr[ns].push(obj);
+		});
+
+		var tuples = [];
+
+		for(var ns in arr)
+		{
+			arr[ns].sort(function(a, b) {
 				if(a.memberName < b.memberName) return -1;
 				if(a.memberName > b.memberName) return 1;
 				return 0;
 			});
+
+			tuples.push([ns, arr[ns]]);
+		}
+
+		tuples.sort(function(a, b) {
+			if(a[0] < b[0]) return -1;
+			if(a[0] > b[0]) return 1;
+			return 0;
 		});
 
 		return tuples;
@@ -267,8 +316,11 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		if(object != null && object != undefined)
 		{
 			$scope.objects.filter(function(obj) {
-				if(obj.namespace == namespace && obj.memberName == object)
-					$scope.currentObject = obj;
+				if(obj.namespace == namespace)
+				{
+					if((object.startsWith("I") && obj.memberName.startsWith(object)) || obj.memberName == object)
+						$scope.currentObject = obj;
+				}
 			});
 
 			if($scope.currentObject != null)
@@ -298,6 +350,9 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 				var groupedMethods = $scope.groupMethodsByNamespace(methods, engineNamespace);
 				$scope.currentObject.methods = groupedMethods;
+
+				var groupedImplemented = $scope.groupedImplementedByNamespace($scope.currentObject.implementedBy, namespace);
+				$scope.currentObject.implementedBy = groupedImplemented;
 
 				var adapters = [];
 				$scope.adapters.filter(function(obj) {

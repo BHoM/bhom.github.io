@@ -144,6 +144,40 @@
 		</div>
 	</div>
 
+	<div class="ng-hide" ng-show="currentObject.isInterface == 1">
+		<div class="row font-zilla-slab margin-top-1">
+			<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayImplementedTypes(currentObject)"><span class="fa {{currentObject.displayImplementedBy ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Implemented By</div>
+		</div>
+
+		<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayImplementedBy">
+			<div class="level-4-indent table-row method-table-row ng-hide" ng-show="currentObject.implementedBy.length == 0">
+				<div class="col-xs-12 text-center">
+					{{currentObject.memberName}} is not implemented by any other objects
+				</div>
+			</div>
+
+			<div class="level-4-indent method-table-row" ng-repeat="a in currentObject.implementedBy">
+				<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
+					<span class="can-click font-bold"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
+				</div>
+
+				<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
+					<div class="table-row">
+						<div class="col-sm-3 table-cell method-table-cell">
+							{{x.namespace}}.<span class="can-click" ng-click="goToObject(x)">{{x.memberName}}</span>
+						</div>
+
+						<div class="col-sm-9 table-cell font-14">
+							<p ng-repeat="a in x.descriptionParts">
+								{{a}}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!--<div class="row font-zilla-slab">
 		<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayAdapterMethods(currentObject)"><span class="fa {{currentObject.displayAdapters ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Adapter Methods</div>
 	</div>

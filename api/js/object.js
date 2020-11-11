@@ -195,6 +195,9 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 	};
 
 	$scope.groupMethodsByNamespace = function(array, coreNS) {
+		if(array.length == 0)
+			return [];
+
 		var arr = [];
 
 		array.forEach(function(obj) {
@@ -209,9 +212,6 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		});
 
 		var tuples = [];
-
-		if(arr.length == 0)
-			return tuples;
 
 		for (var key in arr)
 			tuples.push([key, arr[key]]);
@@ -250,6 +250,9 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 	$scope.groupedImplementedByNamespace = function(array, coreNS)
 	{
+		if(array.length == 0)
+			return [];
+		
 		var arr = [];
 
 		array.forEach(function(obj) {

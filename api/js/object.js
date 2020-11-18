@@ -67,12 +67,28 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 	$scope.goToObjectNamespace = function(namespace)
 	{
 		$scope.setLocationNull();
-		$location.search('namespace', namespace.name);
+
+		var currentItem = namespace;
+		var name = currentItem.current;
+		while(currentItem.parent != null)
+		{
+			currentItem = currentItem.parent;
+			name = currentItem.current + "." + name;
+		}
+
+		name = "BH.oM." + name;
+
+		$location.search('namespace', name);
 		$scope.navigationObjectModel.forEach(function(item) {
 			item.isVisible = false;
-			if(item.name.includes(namespace.name))
+			if(item.name.includes(name))
 				item.isVisible = true;
 		});
+	};
+
+	$scope.expand = function(data)
+	{
+		alert("Hi Bentley");
 	};
 
 	$scope.goToEngineNamespace = function(engine)
@@ -393,7 +409,24 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 	$scope.setUpNavigation = function()
 	{
-		$http.get('js/adapter.json').then(function(response) {
+		$http.get('js/objectNavigation.json').then(function(response) {
+			$scope.navigationObjectModel = response.data;
+
+			$http.get('js/methodNavigation.json').then(function(response) {
+				$scope.navigationEngines = response.data;
+
+				$scope.read_oM();
+			}, function(response) {
+				$scope.handleFailure(response);
+			});
+		}, function(response) {
+			$scope.handleFailure(response);
+		});
+
+
+
+
+		/*$http.get('js/adapter.json').then(function(response) {
 			$scope.adapters = response.data;
 
 			var adapterNames = [];
@@ -437,8 +470,58 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 					$scope.objects = response.data;
 
 					var objectNames = [];
+
+					var objectTree = [];
+
 					$scope.objects.forEach(function(obj) {
 						var ns = obj.namespace;
+
+
+
+						var nsSplit = ns.split('.');
+						var currentChild = null;
+
+						for(var x = nsSplit.length - 2; x >= 2; x--)
+						{
+							var newChild = {
+								children : currentChild,
+								name : nsSplit[x],
+							};
+
+							currentChild = newChild;
+						}
+
+
+
+						var currentIndex = 2;
+						var currentItem = null;
+						var currentParent = "BH.oM";
+
+						while(currentIndex < nsSplit.length - 2)
+						{
+							currentParent += "." + nsSplit[currentIndex];
+							if(currentItem == null)
+							{
+								if(objectTree[nsSplit[currentIndex]] == undefined)
+							}
+						}
+
+						for (var x = 2; x < nsSplit.length - 2; x++)
+						{
+							
+							currentParent += "." + nsSplit[x];
+
+						}
+
+
+
+
+
+
+
+
+
+
 						if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
 							ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
 
@@ -461,6 +544,6 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 			});
 		}, function(response) {
 			$scope.handleFailure(response);
-		});
+		});*/
 	};
 });

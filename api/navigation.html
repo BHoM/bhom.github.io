@@ -1,4 +1,5 @@
 <div class="col-xs-12 col-sm-12 hidden-md hidden-lg mobile-nav">
+	<!-- MOBILE VIEW -->
 	<div class="col-xs-4 text-center">
 		<a href="/api" ng-click="goHome()"><h3 class="font-courier-prime"><span class="bhom-black">BHoM</span><span class="bhom-red">.API</span></h3></a>
 	</div>
@@ -30,16 +31,24 @@
 
 	<div class="row font-zilla-slab">
 		<span class="can-click font-bold" ng-click="showObjects()"><span class="fa {{expandObjects ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> oM</span>
-		<div class="row can-click ng-hide navigation-item" ng-show="expandObjects" ng-repeat="x in navigationObjectModel" ng-click="goToObjectNamespace(x)">
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>
+
+		<ul class="row ng-hide navigation-item" ng-show="expandObjects">
+			<li style="list-style:none;" ng-repeat="data in navigationObjectModel" ng-include="'object_render.html'"></li>
+		</ul>
+		<!--<div class="row ng-hide navigation-item" ng-show="expandObjects" ng-repeat="x in navigationObjectModel" ng-include="'tree_item_renderer.html'">
+
+			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expandNameSpaceNavigation(x)"></span> <span ng-click="goToObjectNamespace(x)">{{displayNamespaceSplit(x)}}</span></span>
+		</div>-->
 	</div>
 
 	<div class="row font-zilla-slab margin-top-3">
 		<span class="can-click font-bold" ng-click="showEngine()"><span class="fa {{expandEngine ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Engine</span>
-		<div class="row can-click ng-hide navigation-item" ng-show="expandEngine" ng-repeat="x in navigationEngines" ng-click="goToEngineNamespace(x)">
+		<ul class="row ng-hide navigation-item" ng-show="expandEngine">
+			<li style="list-style:none;" ng-repeat="data in navigationEngines" ng-include="'engine_render.html'"></li>
+		</ul>
+		<!--<div class="row can-click ng-hide navigation-item" ng-show="expandEngine" ng-repeat="x in navigationEngines" ng-click="goToEngineNamespace(x)">
 			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>
+		</div>-->
 	</div>
 
 	<!--<div class="row">
@@ -49,3 +58,36 @@
 		</div>
 	</div>-->
 </div>
+
+<script type="text/ng-template" id="object_render.html">
+    <span class="font-bold">
+    	<span class="fa {{data.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToObjectNamespace(data)">{{data.current}}</span>
+    	<ul class="row">
+    		<li style="list-style:none;" ng-repeat="data in data.children" ng-include="'object_render.html'"></li>
+    	</ul>
+    </span>
+</script>
+
+<script type="text/ng-template" id="engine_render.html">
+    <span class="font-bold">
+    	<span class="fa {{data.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToObjectNamespace(data)">{{data.current}}</span>
+    	<ul class="row">
+    		<li style="list-style:none;" ng-repeat="data in data.children" ng-include="'engine_render.html'"></li>
+    	</ul>
+    </span>
+</script>
+
+<!--<ul ng-app="Application" ng-controller="TreeController">
+    <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+</ul>-->
+
+<!--{{data.name}}
+    <button ng-click="add(data)">Add node</button>
+    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+    <ul>
+        <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
+    </ul>-->
+
+
+    <!--<span class="font-bold can-click" ng-repeat="x in x.children"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expandNameSpaceNavigation(x)"></span> <span ng-click="goToObjectNamespace(x)">{{x.current}}</span></span>
+    <div ng-repeat="x in x.children" ng-include="'tree_item_renderer.html'"></div>-->

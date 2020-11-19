@@ -22,21 +22,21 @@
 		<div class="property-table-row" ng-repeat="x in currentEngine.methods">		
 			<div class="row property-table-cell">
 				<div class="col-md-12">
-					<span class="object-name can-click" ng-click="displayEngineMethods(x)"><span class="fa {{x.showEngineMethods ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{x[0]}}</span>
+					<span class="object-name can-click"> {{x[0]}}</span>
 				</div>
 			</div>
 
-			<div class="row method-table table-cel level-5-indent ng-hide" ng-show="x.showEngineMethods">
+			<div class="row method-table table-cel level-5-indent">
 				<div class="table-header">
-					<div class="col-md-3 table-header">Name</div>
-					<div class="col-md-9 table-header">Description</div>
+					<div class="col-md-5 table-header">Name</div>
+					<div class="col-md-7 table-header">Description</div>
 				</div>
 
 				<div class="table-row can-click" ng-click="goToMethod(y)" ng-repeat="y in x[1]">
-					<div class="col-md-3">
+					<div class="col-md-5">
 						{{y.memberName}}
 					</div>
-					<div class="col-md-9 font-14">
+					<div class="col-md-7 font-14">
 						<p ng-repeat="a in y.descriptionParts">
 							{{a}}
 						</p>

@@ -33,6 +33,21 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		failureHandling.handleFailure(response, $window);
 	};
 
+	$scope.$on('$locationChangeSuccess', function (a, newUrl, oldUrl) {
+		$scope.isLoading = true;
+
+		if($scope.objects.length == 0)
+			$scope.setUpNavigation(); //First time load
+
+		/*$scope.navigationObjectModel.forEach(function(item) {
+			item.isVisible = false;
+			if(item.name.includes($location.search().namespace))
+				item.isVisible = true;
+		});*/
+
+		$scope.read_oM();
+	});
+
 	$scope.goHome = function()
 	{
 		$scope.isLoading = true;
@@ -79,21 +94,29 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 		name = "BH.oM." + name;
 
 		$location.search('namespace', name);
-		$scope.navigationObjectModel.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes(name))
-				item.isVisible = true;
-		});
 	};
 
 	$scope.expand = function(data)
 	{
-		alert("Hi Bentley");
+		if(data.expandChildren == undefined)
+			data.expandChildren = false;
+
+		data.expandChildren = !data.expandChildren;
 	};
 
 	$scope.goToEngineNamespace = function(engine)
 	{
-		$window.location.href = "engine.html#!?engine=" + engine.name;
+		var currentItem = engine;
+		var name = currentItem.current;
+		while(currentItem.parent != null)
+		{
+			currentItem = currentItem.parent;
+			name = currentItem.current + "." + name;
+		}
+
+		name = "BH.Engine." + name;
+
+		$window.location.href = "engine.html#!?engine=" + name;
 	};
 
 	$scope.goToAdapterNamespace = function(adapter)
@@ -159,21 +182,6 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 	{
 		return apiHelpers.displayNamespaceSplit(namespace);
 	};
-
-	$scope.$on('$locationChangeSuccess', function (a, newUrl, oldUrl) {
-		$scope.isLoading = true;
-
-		if($scope.objects.length == 0)
-			$scope.setUpNavigation(); //First time load
-
-		$scope.navigationObjectModel.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes($location.search().namespace))
-				item.isVisible = true;
-		});
-
-		$scope.read_oM();
-	});
 
 	$scope.goToObject = function(object)
 	{
@@ -409,141 +417,34 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 	$scope.setUpNavigation = function()
 	{
-		$http.get('js/objectNavigation.json').then(function(response) {
-			$scope.navigationObjectModel = response.data;
-
-			$http.get('js/methodNavigation.json').then(function(response) {
-				$scope.navigationEngines = response.data;
-
-				$scope.read_oM();
-			}, function(response) {
-				$scope.handleFailure(response);
-			});
-		}, function(response) {
-			$scope.handleFailure(response);
-		});
-
-
-
-
-		/*$http.get('js/adapter.json').then(function(response) {
-			$scope.adapters = response.data;
-
-			var adapterNames = [];
-
-			$scope.adapters.forEach(function(obj) {
-				var ns = obj.namespace;
-				if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-					ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
-
-				if(adapterNames.indexOf(ns) == -1)
-					adapterNames.push(ns);
-			});
-
-			adapterNames.sort();
-
-			adapterNames.forEach(function(item) {
-				$scope.navigationAdapters.push({name: item, isVisible: false});
-			});
+		$http.get('js/objects.json').then(function(response) {
+			$scope.objects = response.data;
 
 			$http.get('js/methods.json').then(function(response) {
 				$scope.methods = response.data;
 
-				var engineNames = [];
+				$http.get('js/objectNavigation.json').then(function(response) {
+					$scope.navigationObjectModel = response.data;
 
-				$scope.methods.forEach(function(obj) {
-					var ns = obj.namespace;
-					if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-						ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
+					$http.get('js/methodNavigation.json').then(function(response) {
+						$scope.navigationEngines = response.data;
 
-					if(engineNames.indexOf(ns) == -1)
-						engineNames.push(ns);
-				});
-
-				engineNames.sort();
-
-				engineNames.forEach(function(item) {
-					$scope.navigationEngines.push({name: item, isVisible: false});
-				});
-
-				$http.get('js/objects.json').then(function(response) {
-					$scope.objects = response.data;
-
-					var objectNames = [];
-
-					var objectTree = [];
-
-					$scope.objects.forEach(function(obj) {
-						var ns = obj.namespace;
-
-
-
-						var nsSplit = ns.split('.');
-						var currentChild = null;
-
-						for(var x = nsSplit.length - 2; x >= 2; x--)
-						{
-							var newChild = {
-								children : currentChild,
-								name : nsSplit[x],
-							};
-
-							currentChild = newChild;
-						}
-
-
-
-						var currentIndex = 2;
-						var currentItem = null;
-						var currentParent = "BH.oM";
-
-						while(currentIndex < nsSplit.length - 2)
-						{
-							currentParent += "." + nsSplit[currentIndex];
-							if(currentItem == null)
-							{
-								if(objectTree[nsSplit[currentIndex]] == undefined)
-							}
-						}
-
-						for (var x = 2; x < nsSplit.length - 2; x++)
-						{
-							
-							currentParent += "." + nsSplit[x];
-
-						}
-
-
-
-
-
-
-
-
-
-
-						if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-							ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
-
-						if(objectNames.indexOf(ns) == -1)
-							objectNames.push(ns);
+						$scope.read_oM();
+					}, function(response) {
+						//Failure method for getting js/methodNavigation.json
+						$scope.handleFailure(response);
 					});
-
-					objectNames.sort();
-
-					objectNames.forEach(function(item) {
-						$scope.navigationObjectModel.push({name: item, isVisible: false});
-					});
-					
-					$scope.read_oM();
 				}, function(response) {
+					//Failure method for getting js/objectNavigation.json
 					$scope.handleFailure(response);
 				});
 			}, function(response) {
+				//Failure method for getting js/methods.json
 				$scope.handleFailure(response);
 			});
 		}, function(response) {
+			//Failure method for getting js/objects.json
 			$scope.handleFailure(response);
-		});*/
+		});
 	};
 });

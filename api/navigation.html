@@ -61,8 +61,8 @@
 
 <script type="text/ng-template" id="object_render.html">
     <span class="font-bold">
-    	<span class="fa {{data.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToObjectNamespace(data)">{{data.current}}</span>
-    	<ul class="row">
+    	<span class="fa {{data.expandChildren ? 'fa-times-circle' : 'fa-plus-circle'}}" style="{{data.children.length == 0 ? 'color:white;' : ''}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToObjectNamespace(data)">{{data.current}}</span>
+    	<ul class="row ng-hide" ng-show="data.expandChildren">
     		<li style="list-style:none;" ng-repeat="data in data.children" ng-include="'object_render.html'"></li>
     	</ul>
     </span>
@@ -70,8 +70,8 @@
 
 <script type="text/ng-template" id="engine_render.html">
     <span class="font-bold">
-    	<span class="fa {{data.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToObjectNamespace(data)">{{data.current}}</span>
-    	<ul class="row">
+    	<span class="fa {{data.expandChildren ? 'fa-times-circle' : 'fa-plus-circle'}}" style="{{data.children.length == 0 ? 'color:white;' : ''}}" ng-click="expand(data)"></span> <span class="can-click" ng-click="goToEngineNamespace(data)">{{data.current}}</span>
+    	<ul class="row ng-hide" ng-show="data.expandChildren">
     		<li style="list-style:none;" ng-repeat="data in data.children" ng-include="'engine_render.html'"></li>
     	</ul>
     </span>

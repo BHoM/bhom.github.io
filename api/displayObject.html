@@ -102,7 +102,12 @@
 
 					<div class="row" ng-repeat="y in x.inputs">
 						<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
-						<div class="col-sm-3 table-cell-inner"><span class="{{y.isInterface == 1 ? '' : 'can-click'}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
+						<div class="col-sm-3 table-cell-inner">
+							<span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span>
+							<span class="ng-hide" ng-show="y.inheritances.length > 0">
+								[<span ng-repeat="z in y.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < y.inheritances.length - 1">, </span></span> ]
+							</span>
+						</div>
 						<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
 						<div class="col-sm-4 table-cell-inner font-14">
 							<p ng-repeat="a in y.descriptionParts">
@@ -122,7 +127,12 @@
 
 					<div class="row">
 						<div class="col-sm-3 table-cell-inner"></div>
-						<div class="col-sm-3 table-cell-inner">{{x.outputs.namespace}}.{{x.outputs.memberName}}</div>
+						<div class="col-sm-3 table-cell-inner">
+							<span class="{{x.outputs.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x.outputs)">{{x.outputs.namespace}}.{{x.outputs.memberName}}</span>
+							<span class="ng-hide" ng-show="x.outputs.inheritances.length > 0">
+								[<span ng-repeat="z in x.outputs.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < x.outputs.inheritances.length - 1">, </span></span> ]
+							</span>
+						</div>
 						<div class="col-sm-2 table-cell-inner"></div>
 						<div class="col-sm-4 table-cell-inner font-14">
 							<p ng-repeat="a in x.outputs.descriptionParts">

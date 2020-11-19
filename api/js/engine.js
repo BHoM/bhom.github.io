@@ -72,9 +72,12 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 		});
 	};
 
-	$scope.goToObjectNamespace = function(namespace)
+	$scope.expand = function(data)
 	{
-		$window.location.href = "object.html#!?namespace=" + namespace.name;
+		if(data.expandChildren == undefined)
+			data.expandChildren = false;
+
+		data.expandChildren = !data.expandChildren;
 	};
 
 	$scope.displayEngineMethods
@@ -82,12 +85,18 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 	$scope.goToEngineNamespace = function(engine)
 	{
 		$scope.setLocationNull();
-		$location.search('engine', engine.name);
-		$scope.navigationEngines.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes(engine.name))
-				item.isVisible = true;
-		});
+
+		var currentItem = engine;
+		var name = currentItem.current;
+		while(currentItem.parent != null)
+		{
+			currentItem = currentItem.parent;
+			name = currentItem.current + "." + name;
+		}
+
+		name = "BH.Engine." + name;
+
+		$location.search('engine', name);
 	};
 
 	$scope.goToAdapterNamespace = function(adapter)
@@ -155,18 +164,28 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 		if($scope.objects.length == 0)
 			$scope.setUpNavigation(); //First time load
 
-		$scope.navigationEngines.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes($location.search().engine))
-				item.isVisible = true;
-		});
-
 		$scope.read_Engine();
 	});
 
+	$scope.goToObjectNamespace = function(namespace)
+	{
+		var currentItem = namespace;
+		var name = currentItem.current;
+		while(currentItem.parent != null)
+		{
+			currentItem = currentItem.parent;
+			name = currentItem.current + "." + name;
+		}
+
+		name = "BH.oM." + name;
+
+		$window.location.href = "object.html#!?namespace=" + name;
+	}
+
 	$scope.goToObject = function(object)
 	{
-		if(object.isInterface == 1) return;
+		if(!object.namespace.startsWith("BH.oM"))
+			return;
 
 		$window.location.href = "object.html#!?namespace=" + object.namespace + "&object=" + object.memberName;
 	};
@@ -237,11 +256,19 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 
 			if(engine != null && engine != undefined)
 			{
+				var e = engine.split('.');
+				var engineNamespace = "";
+				for(var x = 0; x < e.length - 1; x++)
+					engineNamespace += e[x] + ".";
+
+				engineNamespace = engineNamespace.substring(0, engineNamespace.length - 1);
+				var engineClass = e[e.length - 1];
+
 				$scope.currentEngine = { methods: [], name : "" };
 
 				var methods = [];
 				$scope.methods.filter(function(obj) {
-					if(obj.namespace.includes(engine))
+					if(obj.namespace.includes(engineNamespace) && obj.className == engineClass)
 						methods.push(obj);
 				});
 
@@ -258,12 +285,16 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 		}
 		else
 		{
-			$scope.methods.forEach(function(obj) {
-				var ns = obj.namespace;
-				if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-					ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
+			var e = engine.split('.');
+			var engineNamespace = "";
+			for(var x = 0; x < e.length - 1; x++)
+				engineNamespace += e[x] + ".";
 
-				if(ns == engine && obj.memberName == method)
+			engineNamespace = engineNamespace.substring(0, engineNamespace.length - 1);
+			var engineClass = e[e.length - 1];
+
+			$scope.methods.forEach(function(obj) {
+				if(obj.namespace == engineNamespace && obj.className == engineClass && obj.memberName == method)
 					$scope.currentMethod = obj;
 			});
 
@@ -274,73 +305,33 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 
 	$scope.setUpNavigation = function()
 	{
-		$http.get('js/adapter.json').then(function(response) {
-			$scope.adapters = response.data;
-
-			var adapterNames = [];
-
-			$scope.adapters.forEach(function(obj) {
-				var ns = obj.namespace;
-				if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-					ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
-
-				if(adapterNames.indexOf(ns) == -1)
-					adapterNames.push(ns);
-			});
-
-			adapterNames.sort();
-
-			adapterNames.forEach(function(item) {
-				$scope.navigationAdapters.push({name: item, isVisible: false});
-			});
+		$http.get('js/objects.json').then(function(response) {
+			$scope.objects = response.data;
 
 			$http.get('js/methods.json').then(function(response) {
 				$scope.methods = response.data;
 
-				var engineNames = [];
+				$http.get('js/objectNavigation.json').then(function(response) {
+					$scope.navigationObjectModel = response.data;
 
-				$scope.methods.forEach(function(obj) {
-					var ns = obj.namespace;
-					if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-						ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
+					$http.get('js/methodNavigation.json').then(function(response) {
+						$scope.navigationEngines = response.data;
 
-					if(engineNames.indexOf(ns) == -1)
-						engineNames.push(ns);
-				});
-
-				engineNames.sort();
-
-				engineNames.forEach(function(item) {
-					$scope.navigationEngines.push({name: item, isVisible: false});
-				});
-
-				$http.get('js/objects.json').then(function(response) {
-					$scope.objects = response.data;
-
-					var objectNames = [];
-					$scope.objects.forEach(function(obj) {
-						var ns = obj.namespace;
-						if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
-							ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
-
-						if(objectNames.indexOf(ns) == -1)
-							objectNames.push(ns);
+						$scope.read_Engine();
+					}, function(response) {
+						//Failure method for getting js/methodNavigation.json
+						$scope.handleFailure(response);
 					});
-
-					objectNames.sort();
-
-					objectNames.forEach(function(item) {
-						$scope.navigationObjectModel.push({name: item, isVisible: false});
-					});
-					
-					$scope.read_Engine();
 				}, function(response) {
+					//Failure method for getting js/objectNavigation.json
 					$scope.handleFailure(response);
 				});
 			}, function(response) {
+				//Failure method for getting js/methods.json
 				$scope.handleFailure(response);
 			});
 		}, function(response) {
+			//Failure method for getting js/objects.json
 			$scope.handleFailure(response);
 		});
 	};

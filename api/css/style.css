@@ -232,9 +232,9 @@ h4
 
 .menu-sidebar
 {
-	height: 100vh;
+	/*height: 100vh;
 	border-right: 5px dotted;
-	border-color: #FE224A;
+	border-color: #FE224A;*/
 }
 
 .menu-sidebar-100
@@ -247,6 +247,7 @@ h4
 	border-left: 5px dotted;
 	border-color: #FE224A;
 	height: 100%;
+	min-height: 100vh;
 }
 
 .object-name

@@ -37,6 +37,16 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 		$window.location.href = "/api";
 	};
 
+	$scope.updateSideBarHeight = function()
+	{
+		var sidebar = angular.element(document.querySelector(".content-left-border"))[0];//.offsetHeight;
+
+		if(document.body.scrollHeight > sidebar.offsetHeight)
+		    $('.content-left-border').css('height', document.body.scrollHeight);
+		else
+			$('.content-left-border').css('height', sidebar.offsetHeight);
+	};
+
 	$scope.displayMobileObjectNav = function()
 	{
 		navigationFactory.displayMobileObjectNav($scope);
@@ -50,26 +60,27 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 	$scope.showObjects = function()
 	{
 		$scope.expandObjects = !$scope.expandObjects;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.showEngine = function()
 	{
 		$scope.expandEngine = !$scope.expandEngine;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.showAdapter = function()
 	{
 		$scope.expandAdapter = !$scope.expandAdapter;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.goToMethod = function(method)
 	{
+		var ns = $location.search().engine;
+		ns += "." + method.className;
+		$location.search('engine', ns);
 		$location.search('method', method.memberName);
-		$scope.navigationEngines.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes(method.namespace))
-				item.isVisible = true;
-		});
 	};
 
 	$scope.expand = function(data)
@@ -78,6 +89,7 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 			data.expandChildren = false;
 
 		data.expandChildren = !data.expandChildren;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayEngineMethods
@@ -131,26 +143,31 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 	$scope.displayObjectProperties = function(object)
 	{
 		object.displayProperties = !object.displayProperties;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayEngineMethods = function(engine)
 	{
 		engine.showEngineMethods = !engine.showEngineMethods;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayAdapterMethods = function(object)
 	{
 		object.displayAdapters = !object.displayAdapters;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayMethodInputs = function(method)
 	{
 		method.displayInputs = !method.displayInputs;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayMethodOutputs = function(method)
 	{
 		method.displayOutputs = !method.displayOutputs;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.displayNamespaceSplit = function(namespace)
@@ -235,6 +252,7 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 			object.canView = false;
 		
 		object.canView = !object.canView;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.showHideMethodInputs = function(object)
@@ -243,6 +261,7 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 			object.canViewInputs = false;
 		
 		object.canViewInputs = !object.canViewInputs;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.read_Engine = function()
@@ -376,6 +395,7 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 						item.expandChildren = true;
 				});
 			});
+			$scope.updateSideBarHeight();
 		}
 	};
 });

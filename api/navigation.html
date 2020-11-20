@@ -35,10 +35,6 @@
 		<ul class="row ng-hide navigation-item" ng-show="expandObjects">
 			<li style="list-style:none;" ng-repeat="data in navigationObjectModel" ng-include="'object_render.html'"></li>
 		</ul>
-		<!--<div class="row ng-hide navigation-item" ng-show="expandObjects" ng-repeat="x in navigationObjectModel" ng-include="'tree_item_renderer.html'">
-
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expandNameSpaceNavigation(x)"></span> <span ng-click="goToObjectNamespace(x)">{{displayNamespaceSplit(x)}}</span></span>
-		</div>-->
 	</div>
 
 	<div class="row font-zilla-slab margin-top-3">
@@ -46,17 +42,7 @@
 		<ul class="row ng-hide navigation-item" ng-show="expandEngine">
 			<li style="list-style:none;" ng-repeat="data in navigationEngines" ng-include="'engine_render.html'"></li>
 		</ul>
-		<!--<div class="row can-click ng-hide navigation-item" ng-show="expandEngine" ng-repeat="x in navigationEngines" ng-click="goToEngineNamespace(x)">
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>-->
 	</div>
-
-	<!--<div class="row">
-		<span class="can-click font-bold" ng-click="showAdapter()"><span class="fa {{expandAdapter ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Adapter</span>
-		<div class="row can-click ng-hide navigation-item" ng-show="expandAdapter" ng-repeat="x in navigationAdapters" ng-click="goToAdapterNamespace(x)">
-			<span class="font-bold"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{displayNamespaceSplit(x)}}</span>
-		</div>
-	</div>-->
 </div>
 
 <script type="text/ng-template" id="object_render.html">
@@ -76,18 +62,3 @@
     	</ul>
     </span>
 </script>
-
-<!--<ul ng-app="Application" ng-controller="TreeController">
-    <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
-</ul>-->
-
-<!--{{data.name}}
-    <button ng-click="add(data)">Add node</button>
-    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
-    <ul>
-        <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
-    </ul>-->
-
-
-    <!--<span class="font-bold can-click" ng-repeat="x in x.children"><span class="fa {{x.isVisible ? 'fa-times-circle' : 'fa-plus-circle'}}" ng-click="expandNameSpaceNavigation(x)"></span> <span ng-click="goToObjectNamespace(x)">{{x.current}}</span></span>
-    <div ng-repeat="x in x.children" ng-include="'tree_item_renderer.html'"></div>-->

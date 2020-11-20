@@ -163,6 +163,8 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 
 		if($scope.objects.length == 0)
 			$scope.setUpNavigation(); //First time load
+		else
+			$scope.setNavigationMenu();
 
 		$scope.read_Engine();
 	});
@@ -334,6 +336,8 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 					$http.get('js/methodNavigation.json').then(function(response) {
 						$scope.navigationEngines = response.data;
 
+						$scope.setNavigationMenu();
+
 						$scope.read_Engine();
 					}, function(response) {
 						//Failure method for getting js/methodNavigation.json
@@ -351,5 +355,27 @@ app.controller('methodController', function($scope, $window, $http, $filter, not
 			//Failure method for getting js/objects.json
 			$scope.handleFailure(response);
 		});
+	};
+
+	$scope.setNavigationMenu = function()
+	{
+		var namespace = $location.search().engine;
+		if(namespace != null && namespace != undefined)
+		{
+			$scope.expandEngine = true;
+			$scope.navigationEngines.forEach(function(item) {
+				var ns = "BH.Engine." + item.current;
+				item.expandChildren = false;
+				if(namespace.startsWith(ns))
+					item.expandChildren = true;
+
+				item.children.forEach(function(item2) {
+					var ns2 = ns + "." + item2.current;
+					item2.expandChildren = false;
+					if(namespace.startsWith(ns2))
+						item.expandChildren = true;
+				});
+			});
+		}
 	};
 });

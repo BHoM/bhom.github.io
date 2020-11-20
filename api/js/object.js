@@ -38,12 +38,10 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 		if($scope.objects.length == 0)
 			$scope.setUpNavigation(); //First time load
-
-		/*$scope.navigationObjectModel.forEach(function(item) {
-			item.isVisible = false;
-			if(item.name.includes($location.search().namespace))
-				item.isVisible = true;
-		});*/
+		else
+		{
+			$scope.setNavigationMenu();
+		}
 
 		$scope.read_oM();
 	});
@@ -429,6 +427,8 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 					$http.get('js/methodNavigation.json').then(function(response) {
 						$scope.navigationEngines = response.data;
 
+						$scope.setNavigationMenu();
+
 						$scope.read_oM();
 					}, function(response) {
 						//Failure method for getting js/methodNavigation.json
@@ -446,5 +446,27 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 			//Failure method for getting js/objects.json
 			$scope.handleFailure(response);
 		});
+	};
+
+	$scope.setNavigationMenu = function()
+	{
+		var namespace = $location.search().namespace;
+		if(namespace != null && namespace != undefined)
+		{
+			$scope.expandObjects = true;
+			$scope.navigationObjectModel.forEach(function(item) {
+				var ns = "BH.oM." + item.current;
+				item.expandChildren = false;
+				if(namespace.startsWith(ns))
+					item.expandChildren = true;
+
+				item.children.forEach(function(item2) {
+					var ns2 = ns + "." + item2.current;
+					item2.expandChildren = false;
+					if(namespace.startsWith(ns2))
+						item.expandChildren = true;
+				});
+			});
+		}
 	};
 });

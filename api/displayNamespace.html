@@ -28,7 +28,7 @@
 
 		<div class="table-row property-table-row" ng-repeat="x in selectedNamespaceObjects | orderBy : 'namespace'">
 			<div class="col-sm-6 table-cell property-table-cell can-click" ng-click="goToObject(x)">
-				<span class="pre-object-namespace">{{x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)}}</span>.<span class="object-name">{{x.memberName}}</span>
+				<span class="pre-object-namespace">{{x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)}}</span>{{(x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)).length > 0 ? '.' : ''}}<span class="object-name">{{x.memberName}}</span>
 			</div>
 
 			<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="!isEnum(x)">

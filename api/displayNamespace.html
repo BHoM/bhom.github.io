@@ -1,46 +1,51 @@
-<div class="col-md-8 col-md-offset-1 ng-hide" ng-show="displayNamespace">
-	<div class="row font-courier-prime">
-		<div class="hidden-xs hidden-sm col-md-6">
-			<h3 class="left-hand-header bhom-red">Object Model</h3>
-		</div>
-		<div class="hidden-xs hidden-sm col-md-6 text-right">
-			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
-		</div>
-
-		<div class="col-xs-6 hidden-md hidden-lg">
-			<h3 class="left-hand-header bhom-red">Object Model</h3>
-		</div>
-		<div class="col-xs-6 hidden-md hidden-lg text-right">
-			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
-		</div>
+<div class="main-cell-display content-left-border col-md-8 ng-hide" ng-show="displayNamespace">
+	<div class="col-md-1">
 	</div>
 
-	<div class="row font-zilla-slab">
-		<div class="col-md-12"><h4 class="pre-object-namespace object-name">{{currentNamespace}}</h4></div>
-	</div>
+	<div class="col-md-11">
+		<div class="row font-courier-prime">
+			<div class="hidden-xs hidden-sm col-md-6">
+				<h3 class="left-hand-header bhom-red">Object Model</h3>
+			</div>
+			<div class="hidden-xs hidden-sm col-md-6 text-right">
+				<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+			</div>
 
-	<div class="row property-table font-open-sans">
-		<div class="table-row method-table-row ng-hide" ng-show="selectedNamespaceObjects.length == 0">
-			<div class="col-xs-12 text-center">
-				{{currentNamespace}} has no objects associated with it
+			<div class="col-xs-6 hidden-md hidden-lg">
+				<h3 class="left-hand-header bhom-red">Object Model</h3>
+			</div>
+			<div class="col-xs-6 hidden-md hidden-lg text-right">
+				<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
 			</div>
 		</div>
 
-		<div class="table-row property-table-row" ng-repeat="x in selectedNamespaceObjects | orderBy : 'namespace'">
-			<div class="col-sm-6 table-cell property-table-cell can-click" ng-click="goToObject(x)">
-				<span class="pre-object-namespace">{{x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)}}</span>{{(x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)).length > 0 ? '.' : ''}}<span class="object-name">{{x.memberName}}</span>
+		<div class="row font-zilla-slab">
+			<div class="col-md-12"><h4 class="pre-object-namespace object-name">{{currentNamespace}}</h4></div>
+		</div>
+
+		<div class="row property-table font-open-sans">
+			<div class="table-row method-table-row ng-hide" ng-show="selectedNamespaceObjects.length == 0">
+				<div class="col-xs-12 text-center">
+					{{currentNamespace}} has no objects associated with it
+				</div>
 			</div>
 
-			<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="!isEnum(x)">
-				<p ng-repeat="a in x.descriptionParts">
-					{{a}}
-				</p>
-			</div>
+			<div class="table-row property-table-row" ng-repeat="x in selectedNamespaceObjects | orderBy : 'namespace'">
+				<div class="col-sm-6 table-cell property-table-cell can-click" ng-click="goToObject(x)">
+					<span class="pre-object-namespace">{{x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)}}</span>{{(x.namespace.substring(x.namespace.indexOf(currentNamespace) + currentNamespace.length + 1)).length > 0 ? '.' : ''}}<span class="object-name">{{x.memberName}}</span>
+				</div>
 
-			<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="isEnum(x)">
-				<p>
-					This is an enum with {{(x.descriptionParts.length - x.descriptionParts.indexOf("Enum values: ")) - 1}} options
-				</p>
+				<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="!isEnum(x)">
+					<p ng-repeat="a in x.descriptionParts">
+						{{a}}
+					</p>
+				</div>
+
+				<div class="col-sm-6 table-cell property-table-cell font-14 ng-hide" ng-show="isEnum(x)">
+					<p>
+						This is an enum with {{(x.descriptionParts.length - x.descriptionParts.indexOf("Enum values: ")) - 1}} options
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>

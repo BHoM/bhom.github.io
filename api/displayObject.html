@@ -1,223 +1,102 @@
-<div class="col-md-8 col-md-offset-1 ng-hide" ng-show="displayObject">
-	<div class="row font-courier-prime">
-		<div class="hidden-xs hidden-sm col-md-6">
-			<h3 class="left-hand-header bhom-red">Object Model</h3>
-		</div>
-		<div class="hidden-xs hidden-sm col-md-6 text-right">
-			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
-		</div>
-
-		<div class="col-xs-6 hidden-md hidden-lg">
-			<h3 class="left-hand-header bhom-red">Object Model</h3>
-		</div>
-		<div class="col-xs-6 hidden-md hidden-lg text-right">
-			<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
-		</div>
+<div class="main-cell-display content-left-border col-md-8 ng-hide" ng-show="displayObject">
+	<div class="col-md-1">
 	</div>
 
-	<div class="row font-open-sans">
-		<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> :
-			<span ng-repeat="x in currentObject.inheritance" class="inheritance-name">
-				<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x)">{{x.memberName}}</span>
-				<span class="ng-hide" ng-show="x.inheritances.length > 0">
-					[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
-				</span>,
-			</span>
-	</span></div>
+	<div class="col-md-11">
+		<div class="row font-courier-prime">
+			<div class="hidden-xs hidden-sm col-md-6">
+				<h3 class="left-hand-header bhom-red">Object Model</h3>
+			</div>
+			<div class="hidden-xs hidden-sm col-md-6 text-right">
+				<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+			</div>
 
-		<div class="col-md-12">
-			<p ng-repeat="a in currentObject.descriptionParts">
-				<span class="object-description">{{a}}</span>
-			</p>
-		</div>
-
-		<div class="col-md-12 object-properties can-click font-bold font-zilla-slab margin-top-3" ng-click="displayObjectProperties(currentObject)"><span class="fa {{currentObject.displayProperties ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Object Properties</div>
-	</div>
-
-	<div class="row property-table font-open-sans ng-hide" ng-show="currentObject.displayProperties">
-		<div class="table-row method-table-row ng-hide" ng-show="currentObject.properties.length == 0">
-			<div class="col-xs-12 text-center">
-				{{currentObject.memberName}} has no properties associated with it
+			<div class="col-xs-6 hidden-md hidden-lg">
+				<h3 class="left-hand-header bhom-red">Object Model</h3>
+			</div>
+			<div class="col-xs-6 hidden-md hidden-lg text-right">
+				<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo-xs" /></p>
 			</div>
 		</div>
 
-		<div class="table-row property-table-row" ng-repeat="x in currentObject.properties">
-			<div class="col-sm-2 property-table-cell">
-				{{x.name}}
-			</div>
-
-			<div class="col-sm-2 property-table-cell">
-				<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(x)">{{x.type}}</span>
-				<span class="ng-hide" ng-show="x.inheritances.length > 0">
-					[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
+		<div class="row font-open-sans">
+			<div class="col-md-12"><span class="pre-object-namespace">{{currentObject.namespace}}</span>.<span class="object-name">{{currentObject.memberName}}</span> :
+				<span ng-repeat="x in currentObject.inheritance" class="inheritance-name">
+					<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x)">{{x.memberName}}</span>
+					<span class="ng-hide" ng-show="x.inheritances.length > 0">
+						[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
+					</span>,
 				</span>
+		</span></div>
+
+			<div class="col-md-12">
+				<p ng-repeat="a in currentObject.descriptionParts">
+					<span class="object-description">{{a}}</span>
+				</p>
 			</div>
 
-			<div class="col-sm-8 property-table-cell font-14">
-				{{x.description}}
-			</div>
-		</div>
-	</div>
-
-	<div class="row font-zilla-slab margin-top-1">
-		<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayEngineMethods(currentObject)"><span class="fa {{currentObject.displayMethods ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Engine Methods</div>
-	</div>
-
-	<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayMethods">
-		<div class="level-4-indent table-row method-table-row ng-hide" ng-show="currentObject.methods.length == 0">
-			<div class="col-xs-12 text-center">
-				{{currentObject.memberName}} has no methods associated with it
-			</div>
+			<div class="col-md-12 object-properties can-click font-bold font-zilla-slab margin-top-3" ng-click="displayObjectProperties(currentObject)"><span class="fa {{currentObject.displayProperties ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Object Properties</div>
 		</div>
 
-		<div class="level-4-indent method-table-row" ng-repeat="a in currentObject.methods">
-			<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
-				<span class="can-click font-bold"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
-			</div>
-
-			<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
-				<div class="table-row">
-					<div class="col-sm-3 table-cell method-table-header-cell can-click" ng-click="showHideMethodInputs(x)">
-						<span class="fa {{x.canViewInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{x.memberName}}
-					</div>
-
-					<div class="col-sm-3 table-cell">
-						{{x.className}}
-					</div>
-
-					<div class="col-sm-6 table-cell font-14">
-						<p ng-repeat="a in x.descriptionParts">
-							{{a}}
-						</p>
-					</div>
-				</div>
-
-				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
-					<div class="row">
-						<div class="col-sm-3 table-cell-inner table-header">Inputs</div>
-						<div class="col-sm-3 table-cell-inner table-header">Type</div>
-						<div class="col-sm-2 table-cell-inner table-header">Is Required</div>
-						<div class="col-sm-4 table-cell-inner table-header">Description</div>
-					</div>
-
-					<div class="row" ng-repeat="y in x.inputs">
-						<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
-						<div class="col-sm-3 table-cell-inner">
-							<span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span>
-							<span class="ng-hide" ng-show="y.inheritances.length > 0">
-								[<span ng-repeat="z in y.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < y.inheritances.length - 1">, </span></span> ]
-							</span>
-						</div>
-						<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
-						<div class="col-sm-4 table-cell-inner font-14">
-							<p ng-repeat="a in y.descriptionParts">
-								{{a}}
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
-					<div class="row table-inner-margin">
-						<div class="col-sm-3 table-cell-inner table-header">Outputs</div>
-						<div class="col-sm-3 table-cell-inner table-header">Type</div>
-						<div class="col-sm-2 table-cell-inner"></div>
-						<div class="col-sm-4 table-cell-inner table-header">Description</div>
-					</div>
-
-					<div class="row">
-						<div class="col-sm-3 table-cell-inner"></div>
-						<div class="col-sm-3 table-cell-inner">
-							<span class="{{x.outputs.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x.outputs)">{{x.outputs.namespace}}.{{x.outputs.memberName}}</span>
-							<span class="ng-hide" ng-show="x.outputs.inheritances.length > 0">
-								[<span ng-repeat="z in x.outputs.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < x.outputs.inheritances.length - 1">, </span></span> ]
-							</span>
-						</div>
-						<div class="col-sm-2 table-cell-inner"></div>
-						<div class="col-sm-4 table-cell-inner font-14">
-							<p ng-repeat="a in x.outputs.descriptionParts">
-								{{a}}
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
-					<div class="row table-inner-margin">
-						<div class="col-sm-3 table-cell-inner table-header">Assembly</div>
-						<div class="col-sm-3 table-cell-inner">{{x.assemblyName}}</div>
-						<div class="col-sm-2 table-cell-inner"></div>
-						<div class="col-sm-3 table-cell-inner"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="ng-hide" ng-show="currentObject.isInterface == 1">
-		<div class="row font-zilla-slab margin-top-1">
-			<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayImplementedTypes(currentObject)"><span class="fa {{currentObject.displayImplementedBy ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Implemented By</div>
-		</div>
-
-		<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayImplementedBy">
-			<div class="level-4-indent table-row method-table-row ng-hide" ng-show="currentObject.implementedBy.length == 0">
+		<div class="row property-table font-open-sans ng-hide" ng-show="currentObject.displayProperties">
+			<div class="table-row method-table-row ng-hide" ng-show="currentObject.properties.length == 0">
 				<div class="col-xs-12 text-center">
-					{{currentObject.memberName}} is not implemented by any other objects
+					{{currentObject.memberName}} has no properties associated with it
 				</div>
 			</div>
 
-			<div class="level-4-indent method-table-row" ng-repeat="a in currentObject.implementedBy">
+			<div class="table-row property-table-row" ng-repeat="x in currentObject.properties">
+				<div class="col-sm-2 property-table-cell">
+					{{x.name}}
+				</div>
+
+				<div class="col-sm-2 property-table-cell">
+					<span class="{{x.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(x)">{{x.type}}</span>
+					<span class="ng-hide" ng-show="x.inheritances.length > 0">
+						[<span ng-repeat="y in x.inheritances track by $index"><span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToType(y)">{{y.memberName}}</span><span class="ng-hide" ng-show="$index < x.inheritances.length - 1">, </span></span> ]
+					</span>
+				</div>
+
+				<div class="col-sm-8 property-table-cell font-14">
+					{{x.description}}
+				</div>
+			</div>
+		</div>
+
+		<div class="row font-zilla-slab margin-top-1">
+			<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayEngineMethods(currentObject)"><span class="fa {{currentObject.displayMethods ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Engine Methods</div>
+		</div>
+
+		<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayMethods">
+			<div class="level-4-indent table-row method-table-row ng-hide" ng-show="currentObject.methods.length == 0">
+				<div class="col-xs-12 text-center">
+					{{currentObject.memberName}} has no methods associated with it
+				</div>
+			</div>
+
+			<div class="level-4-indent method-table-row" ng-repeat="a in currentObject.methods">
 				<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
 					<span class="can-click font-bold"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
 				</div>
 
 				<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
 					<div class="table-row">
-						<div class="col-sm-3 table-cell method-table-cell">
-							{{x.namespace}}.<span class="can-click" ng-click="goToObject(x)">{{x.memberName}}</span>
+						<div class="col-sm-3 table-cell method-table-header-cell can-click" ng-click="showHideMethodInputs(x)">
+							<span class="fa {{x.canViewInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{x.memberName}}
 						</div>
 
-						<div class="col-sm-9 table-cell font-14">
+						<div class="col-sm-3 table-cell">
+							{{x.className}}
+						</div>
+
+						<div class="col-sm-6 table-cell font-14">
 							<p ng-repeat="a in x.descriptionParts">
 								{{a}}
 							</p>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<!--<div class="row font-zilla-slab">
-		<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayAdapterMethods(currentObject)"><span class="fa {{currentObject.displayAdapters ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Adapter Methods</div>
-	</div>
-
-	<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayAdapters">
-		<div class="level-5-indent table-row method-table-row ng-hide" ng-show="currentObject.adapters.length == 0">
-			<div class="col-xs-12 text-center">
-				{{currentObject.memberName}} has no adapters associated with it
-			</div>
-		</div>
-
-		<div class="level-5-indent method-table-row" ng-repeat="a in currentObject.adapters">
-			<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
-				<span class="can-click"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
-			</div>
-
-			<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
-				<div class="level-5-indent row">
-					<div class="row table-cell">{{x.memberName}}</div>
-					<div class="row table-cell">{{x.className}}</div>
-					<div class="row table-cell">{{x.namespace}}</div>
-					<div class="row table-cell">{{x.assemblyName}}</div>
-					<div class="row table-cell">{{x.description}}</div>
-					<div class="row method-input-table-header can-click" ng-click="showHideMethodInputs(x)">
-						<span class="fa {{x.canViewInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Inputs
-					</div>
-				</div>
-
-				<div class="level-5-indent row">
-					<div class="ng-hide table-cell" ng-show="x.canViewInputs">
+					<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
 						<div class="row">
 							<div class="col-sm-3 table-cell-inner table-header">Inputs</div>
 							<div class="col-sm-3 table-cell-inner table-header">Type</div>
@@ -227,17 +106,143 @@
 
 						<div class="row" ng-repeat="y in x.inputs">
 							<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
-							<div class="col-sm-3 table-cell-inner"><span class="can-click" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
-							<div class="col-sm-2 table-cell-inner">{{y.isRequired}}</div>
-							<div class="col-sm-4 table-cell-inner">{{(y.description == "" ? 'N/A' : y.description)}}</div>
+							<div class="col-sm-3 table-cell-inner">
+								<span class="{{y.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span>
+								<span class="ng-hide" ng-show="y.inheritances.length > 0">
+									[<span ng-repeat="z in y.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < y.inheritances.length - 1">, </span></span> ]
+								</span>
+							</div>
+							<div class="col-sm-2 table-cell-inner">{{(y.isRequired == 1 ? 'Yes' : 'No')}}</div>
+							<div class="col-sm-4 table-cell-inner font-14">
+								<p ng-repeat="a in y.descriptionParts">
+									{{a}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
+						<div class="row table-inner-margin">
+							<div class="col-sm-3 table-cell-inner table-header">Outputs</div>
+							<div class="col-sm-3 table-cell-inner table-header">Type</div>
+							<div class="col-sm-2 table-cell-inner"></div>
+							<div class="col-sm-4 table-cell-inner table-header">Description</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-3 table-cell-inner"></div>
+							<div class="col-sm-3 table-cell-inner">
+								<span class="{{x.outputs.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(x.outputs)">{{x.outputs.namespace}}.{{x.outputs.memberName}}</span>
+								<span class="ng-hide" ng-show="x.outputs.inheritances.length > 0">
+									[<span ng-repeat="z in x.outputs.inheritances track by $index"><span class="{{z.namespace.startsWith('BH.oM') ? 'can-click' : ''}}" ng-click="goToObject(z)">{{z.memberName}}</span><span class="ng-hide" ng-show="$index < x.outputs.inheritances.length - 1">, </span></span> ]
+								</span>
+							</div>
+							<div class="col-sm-2 table-cell-inner"></div>
+							<div class="col-sm-4 table-cell-inner font-14">
+								<p ng-repeat="a in x.outputs.descriptionParts">
+									{{a}}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="ng-hide lg-background table-cell method-table-cell" ng-show="x.canViewInputs">
+						<div class="row table-inner-margin">
+							<div class="col-sm-3 table-cell-inner table-header">Assembly</div>
+							<div class="col-sm-3 table-cell-inner">{{x.assemblyName}}</div>
+							<div class="col-sm-2 table-cell-inner"></div>
+							<div class="col-sm-3 table-cell-inner"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>-->
 
-	<!--<p class="version-info version-title font-open-sans">Assembly and Version Information</p>
-	<p class="version-info font-open-sans">{{currentObject.assembly}}</p>
-	<p class="version-info font-open-sans">{{currentObject.version}}</p>-->
+		<div class="ng-hide" ng-show="currentObject.isInterface == 1">
+			<div class="row font-zilla-slab margin-top-1">
+				<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayImplementedTypes(currentObject)"><span class="fa {{currentObject.displayImplementedBy ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Implemented By</div>
+			</div>
+
+			<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayImplementedBy">
+				<div class="level-4-indent table-row method-table-row ng-hide" ng-show="currentObject.implementedBy.length == 0">
+					<div class="col-xs-12 text-center">
+						{{currentObject.memberName}} is not implemented by any other objects
+					</div>
+				</div>
+
+				<div class="level-4-indent method-table-row" ng-repeat="a in currentObject.implementedBy">
+					<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
+						<span class="can-click font-bold"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
+					</div>
+
+					<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
+						<div class="table-row">
+							<div class="col-sm-3 table-cell method-table-cell">
+								{{x.namespace}}.<span class="can-click" ng-click="goToObject(x)">{{x.memberName}}</span>
+							</div>
+
+							<div class="col-sm-9 table-cell font-14">
+								<p ng-repeat="a in x.descriptionParts">
+									{{a}}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--<div class="row font-zilla-slab">
+			<div class="col-md-12 engine-methods can-click font-bold" ng-click="displayAdapterMethods(currentObject)"><span class="fa {{currentObject.displayAdapters ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Adapter Methods</div>
+		</div>
+
+		<div class="row method-table font-open-sans ng-hide" ng-show="currentObject.displayAdapters">
+			<div class="level-5-indent table-row method-table-row ng-hide" ng-show="currentObject.adapters.length == 0">
+				<div class="col-xs-12 text-center">
+					{{currentObject.memberName}} has no adapters associated with it
+				</div>
+			</div>
+
+			<div class="level-5-indent method-table-row" ng-repeat="a in currentObject.adapters">
+				<div class="namespace-display accordion-display" ng-click="showHideNamespace(a)">
+					<span class="can-click"><span class="fa {{a.canView ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> {{a[0]}}</span>
+				</div>
+
+				<div class="namespace-methods-display ng-hide" ng-show="a.canView" ng-repeat="x in a[1]">
+					<div class="level-5-indent row">
+						<div class="row table-cell">{{x.memberName}}</div>
+						<div class="row table-cell">{{x.className}}</div>
+						<div class="row table-cell">{{x.namespace}}</div>
+						<div class="row table-cell">{{x.assemblyName}}</div>
+						<div class="row table-cell">{{x.description}}</div>
+						<div class="row method-input-table-header can-click" ng-click="showHideMethodInputs(x)">
+							<span class="fa {{x.canViewInputs ? 'fa-times-circle' : 'fa-plus-circle'}}"></span> Inputs
+						</div>
+					</div>
+
+					<div class="level-5-indent row">
+						<div class="ng-hide table-cell" ng-show="x.canViewInputs">
+							<div class="row">
+								<div class="col-sm-3 table-cell-inner table-header">Inputs</div>
+								<div class="col-sm-3 table-cell-inner table-header">Type</div>
+								<div class="col-sm-2 table-cell-inner table-header">Is Required</div>
+								<div class="col-sm-4 table-cell-inner table-header">Description</div>
+							</div>
+
+							<div class="row" ng-repeat="y in x.inputs">
+								<div class="col-sm-3 table-cell-inner">{{y.inputName}}</div>
+								<div class="col-sm-3 table-cell-inner"><span class="can-click" ng-click="goToObject(y)">{{y.namespace}}.{{y.memberName}}</span></div>
+								<div class="col-sm-2 table-cell-inner">{{y.isRequired}}</div>
+								<div class="col-sm-4 table-cell-inner">{{(y.description == "" ? 'N/A' : y.description)}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
+
+		<!--<p class="version-info version-title font-open-sans">Assembly and Version Information</p>
+		<p class="version-info font-open-sans">{{currentObject.assembly}}</p>
+		<p class="version-info font-open-sans">{{currentObject.version}}</p>-->
+	</div>
 </div>

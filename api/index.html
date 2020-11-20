@@ -71,42 +71,48 @@
 					</div>
 				</div>
 
-				<div class="col-md-8 col-md-offset-1 font-open-sans ng-hide" ng-show="displayResults">
-					<div class="row">
-						<div class="col-md-6">
-							<input class="form-control search-box-top margin-top-10 main-search" type="text" ng-model="mainSearch.searchTerm" ng-keypress="runSearchKeyPress($event)" />
-						</div>
-						<div class="col-md-6 text-right">
-							<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
-						</div>
+				<div class="main-cell-display content-left-border col-md-8 font-open-sans ng-hide" ng-show="displayResults">
+					<div class="col-md-1">
+
 					</div>
 
-					<div class="row">
-						<span class="fa fa-spinner fa-5x fa-fw text-center ng-hide" ng-show="loadingSearch"></span>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 ng-hide" ng-show="searchResults.length > 0">
-							You searched for <span class="font-bold">{{mainSearch.searchTerm}}</span> and we found these results:
+					<div class="col-md-11">
+						<div class="row">
+							<div class="col-md-6">
+								<input class="form-control search-box-top margin-top-10 main-search" type="text" ng-model="mainSearch.searchTerm" ng-keypress="runSearchKeyPress($event)" />
+							</div>
+							<div class="col-md-6 text-right">
+								<p class="right-hand-header"><img src="img/main-logo.png" class="top-right-logo" /></p>
+							</div>
 						</div>
 
-						<div class="col-md-12 ng-hide" ng-show="searchResults.length == 0">
-							You searched for <span class="font-bold">{{mainSearch.searchTerm}}</span>. Unfortunately we could not find any results for that search term. You might like to read <a href="https://github.com/BHoM/documentation/wiki" class="can-click" target="_blank">the Wiki</a> or search <a href="https://github.com/BHoM/BHoM/discussions" class="can-click" target="_blank">the discussions</a>.
-						</div>
-					</div>
-
-					<div class="search-result" ng-repeat="x in searchResults">
-						<div class="search-result-name can-click" ng-click="goToResult(x)">
-							{{x.namespace}}.{{x.memberName}}
+						<div class="row">
+							<span class="fa fa-spinner fa-5x fa-fw text-center ng-hide" ng-show="loadingSearch"></span>
 						</div>
 
-						<div class="search-result-description">
-							<span class="object-description font-14">
-								<p ng-repeat="a in x.descriptionParts | limitTo:3">
-									{{a}}
-								</p>
-								<p class="ng-hide" ng-show="x.descriptionParts.length > 3">...</p>
-							</span>
+						<div class="row">
+							<div class="col-md-12 ng-hide" ng-show="searchResults.length > 0">
+								You searched for <span class="font-bold">{{mainSearch.searchTerm}}</span> and we found these results:
+							</div>
+
+							<div class="col-md-12 ng-hide" ng-show="searchResults.length == 0">
+								You searched for <span class="font-bold">{{mainSearch.searchTerm}}</span>. Unfortunately we could not find any results for that search term. You might like to read <a href="https://github.com/BHoM/documentation/wiki" class="can-click" target="_blank">the Wiki</a> or search <a href="https://github.com/BHoM/BHoM/discussions" class="can-click" target="_blank">the discussions</a>.
+							</div>
+						</div>
+
+						<div class="search-result" ng-repeat="x in searchResults">
+							<div class="search-result-name can-click" ng-click="goToResult(x)">
+								{{x.namespace}}.{{x.memberName}}
+							</div>
+
+							<div class="search-result-description">
+								<span class="object-description font-14">
+									<p ng-repeat="a in x.descriptionParts | limitTo:3">
+										{{a}}
+									</p>
+									<p class="ng-hide" ng-show="x.descriptionParts.length > 3">...</p>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

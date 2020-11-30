@@ -367,7 +367,8 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 			$scope.objects.filter(function(obj) {
 				if(obj.namespace == namespace)
 				{
-					if((object.startsWith("I") && obj.memberName.startsWith(object)) || obj.memberName == object)
+					var objName = obj.memberName.split('[');
+					if(objName[0] == object)
 						$scope.currentObject = obj;
 				}
 			});

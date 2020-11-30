@@ -301,13 +301,28 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 
 		array.forEach(function(obj) {
 			var ns = obj.namespace;
+			var goHard = false;
+
+			if(ns == undefined)
+			{
+				ns = obj[0]; //Back up
+				goHard = true;
+			}
+
 			if(apiHelpers.nthIndexOf(ns, '.', 3) != -1)
 				ns = ns.substring(0, apiHelpers.nthIndexOf(ns, '.', 3));
 
 			if(arr[ns] == undefined)
 				arr[ns] = [];
 
-			arr[ns].push(obj);
+			if(!goHard)
+				arr[ns].push(obj);
+			else
+			{
+				obj[1].forEach(function(item) {
+					arr[ns].push(item);
+				});
+			}
 		});
 
 		var tuples = [];

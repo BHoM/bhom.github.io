@@ -435,8 +435,8 @@ app.controller('objectController', function($scope, $window, $http, $filter, not
 			$scope.setDisplayNamespace();
 		}
 
-		$scope.updateSideBarHeight();
 		$scope.isLoading = false;
+		$scope.updateSideBarHeight();
 	};
 
 	$scope.setUpNavigation = function()
